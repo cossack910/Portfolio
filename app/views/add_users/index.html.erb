@@ -1,0 +1,85 @@
+<%= javascript_pack_tag 'add_user'%>
+<div class="container-fluid bg_color">
+    <div class="row">
+        <div class="col-2"></div>
+            <div class="col-8 bg-white p-5">
+                <%= form_for @user, url: add_users_confirm_path do |f| %>
+                    <h5 class="text-center mb-5">新規登録</h5>
+                    <table class="ml-auto mr-auto">
+                        <tr>                       
+                            <th style="width:25%">ユーザー名</th>
+                            <td style="width:75%" colspan="2">
+                            <%= f.text_field :user_name, class: "form-control col-8 ml-2", style: "",placeholder: "ユーザー名",id: "user_name_add" %>
+                            </td>                                   
+                        </tr>
+                        <tr><td></td><td colspan="2"><div id="miss_user_name" class="m-1 alert" ></div></td></tr>
+                        <tr>                        
+                            <th style="width:25%">名前</th>
+                            <td style="width:20%">
+                            <%= f.text_field :last_name,class: "form-control col-9 ml-2", style: "",placeholder: "姓",id: "last_name_add" %>
+                            </td>     
+                            <td style="width:35%">
+                            <%= f.text_field :first_name,class: "form-control col-5 ml-2", style: "",placeholder: "名",id: "first_name_add" %>
+                            </td>                                    
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><div id="miss_last_name" class="m-1 alert"></div></td>
+                            <td><div id="miss_first_name" class="m-1 alert"></div></td>
+                        </tr>
+                        <tr>                        
+                            <th style="width:25%">性別</th>
+                            <td style="width:75%" class="pl-2" colspan="2">
+                                <%= f.radio_button :gender, "男性",checked: true %>
+                                <%= f.label :gender_man, "男性" %>
+                                <%= f.radio_button :gender, "女性" %>
+                                <%= f.label :gender_women, "女性" %>
+                                <%= f.radio_button :gender, "その他" %>
+                                <%= f.label :gender_others, "その他" %>
+                            </td>                                       
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>                        
+                            <th style="width:25%">生年月日</th>
+                            <td style="width:75%" colspan="2">
+                                <%= f.text_field :birthday, class: "form-control col-8 ml-2", placeholder: "1990年1月05日→19900105",id: "birthday_add" %>
+                            </td>                                     
+                        </tr>
+                        <tr><td></td><td colspan="2"><div id="miss_birthday" class="m-1 alert" ></div></td></tr>      
+                        <tr>                       
+                            <th style="width:25%">メールアドレス</th>
+                            <td style="width:75%" colspan="2">
+                            <%= f.text_field :mail, class: "form-control col-8 ml-2",placeholder: "メールアドレス", onBlur: "seikicheck();",id: "mail_add1" %>
+                            </td>                         
+                        </tr>
+                        <tr><td></td><td colspan="2"><div id="miss_mail1" class="m-1 alert" ></div></td></tr>
+                        <tr>                       
+                            <th style="width:25%">メールアドレス確認</th>
+                            <td style="width:75%" colspan="2">
+                            <%= f.text_field :mail_sub, class: "form-control col-8 ml-2", placeholder: "メールアドレス確認", onBlur: "mailcheck();",id: "mail_add2" %>
+                            </td>                             
+                        </tr>
+                        <tr><td></td><td colspan="2"><div id="miss_mail2" class="m-1 alert" ></div></td></tr>
+                        <tr>                       
+                            <th style="width:25%">パスワード</th>
+                            <td style="width:75%" colspan="2">
+                            <%= f.password_field :password, class: "form-control col-8 ml-2", placeholder: "パスワード", onBlur: "passlength();", id: "pass_add1" %>
+                            </td>                                            
+                        </tr>
+                        <tr><td></td><td colspan="2"><div id="miss_pass1" class="m-1 alert" ></div></td></tr>
+                        <tr>                    
+                            <th style="width:25%">パスワード確認</th>
+                            <td style="width:75%" colspan="2">
+                            <%= f.password_field :password_confirmation, class: "form-control col-8 ml-2", placeholder: "パスワード確認", onBlur: "passcheck();", id: "pass_add2" %>
+                            </td>                                               
+                        </tr>
+                        <tr><td></td><td  colspan="2"><div id="miss_pass2" class="m-1 alert"></div></td></tr>
+                    </table>
+                    <%= submit_tag("新規登録", class: "btn btn-danger mx-auto d-block w-50 mt-5", onClick: "return check();") %>
+                <% end %>  
+                <hr>   
+            </div>
+        <div class="col-2"></div>    
+    </div>
+    <div class="row"></div>
+</div>

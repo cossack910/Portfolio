@@ -1,0 +1,16 @@
+<h2><%= @id %></h2>
+<%= form_for @gadget, url: other_add_update_path(id: @gadget.id) do |f| %>
+  ガジェット名：<br>
+  <%= f.text_field :gadget_name %><br>
+  ガジェット情報：<br>
+  <%= f.text_area :gadget_info , size: "100x15"%><br>
+  ガジェットカテゴリー：<br>
+  <%= f.text_field :category_id %><br>
+  ガジェットURL：<br>
+  <%= f.text_field :gadget_url ,style: "width:50rem"%><br>
+  ガジェット画像<br>
+  <%= f.text_field :image ,style: "width:50rem" %><br>
+  発売日<br>
+  <%= f.text_field :release_date %><br>
+  <%= f.submit '完了' %>
+<% end %>

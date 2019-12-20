@@ -1,0 +1,32 @@
+<div>
+<%= form_for @gadget, url: other_add_create_path do |f| %>
+  ガジェット名：<br>
+  <%= f.text_field :gadget_name %><br>
+  ガジェット情報：<br>
+  <%= f.text_area :gadget_info , size: "100x15"%><br>
+  ガジェットカテゴリー：<br>
+  <%= f.text_field :category_id %><br>
+  ガジェットURL：<br>
+  <%= f.text_field :gadget_url %><br>
+  ガジェット画像<br>
+  <%= f.file_field :image %><br>
+  発売日<br>
+  <%= f.text_field :release_date %><br>
+  <%= f.submit '完了' %>
+<% end %>
+
+<table>
+<tr>
+<th>id</th>
+<th>gadget_name</th>
+<th>update</th>
+</tr>
+<% @gadget_view.each do |show| %>
+  <tr>
+  <td><%= show.id %></td>
+  <td><%= show.gadget_name %></td>
+  <td><%= link_to "update",  other_add_edit_path(id: show.id)%></td>
+  <tr>
+<% end %>
+</table>
+</div>

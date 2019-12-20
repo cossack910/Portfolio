@@ -1,0 +1,187 @@
+<div class="container-fluid bg_image">
+    <div class="row bg-white">
+        <div class="col-1"></div>
+            <div class="jumbotron jumbotron-fluid col-10 mb-0">
+                <div class="container-fluid" >
+                    <h3 class="text-white font-weight-bolder ml-5">やぁ!</h3> 
+                    <p class="lead text-white ml-5">表裏一体そんな観点からあなたのガジェットをレビューしてみませんか？</p>
+                </div>   
+            </div><!-- /.jumbotron--> 
+        <div class="col-1"></div>
+    </div>
+    <div class="row bg-white">
+    <div class="col-1"></div>
+    <div class="col-10 mt-1"><br></div>
+    <div class="col-1"></div>
+    </div>
+    <div class="row bg-light">
+        <div class="col-1"></div>
+        <ul class="nav nav-tabs col-10 font-weight-bolder">
+            <li class="nav-item">
+                <a href="#new_gadgets" class="nav-link active text-muted" data-toggle="tab">新着ガジェット</a>
+            </li> 
+            <li class="nav-item">
+                <a href="#new_reviews" class="nav-link text-muted" data-toggle="tab">新着レビュー</a>
+            </li> 
+            <li class="nav-item">
+                <a href="#new_release_date" class="nav-link text-muted" data-toggle="tab">発売日</a>
+            </li>
+            <li class="nav-item">
+                <a href="#new_pfones" class="nav-link text-muted" data-toggle="tab">スマートフォン</a>
+            </li> 
+            <li class="nav-item">
+                <a href="#new_pc" class="nav-link text-muted" data-toggle="tab">PC関連</a>
+            </li> 
+            <li class="nav-item">
+                <a href="#new_other" class="nav-link text-muted" data-toggle="tab">その他</a>
+            </li> 
+        </ul>
+        <div class="col-1">
+        </div>
+    </div>
+    <div class="row bg-light">
+        <div class="col-1">
+        </div>
+        <div class="col-7 bg-white pt-3 rounded">
+            <div class="tab-content">
+                <div id="new_gadgets" class="tab-pane active">
+                    <% @gadget[0..4].each do |disp|%>
+                        <div class="card mb-3" style="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="<%= disp.image %>" class="img-thumbnail">
+                                       </div>  
+                                    <div class="col-8">  
+                                        <h5><%= disp.gadget_name %></h5>
+                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                </div><!--new_gadgets-->
+                <div id="new_reviews" class="tab-pane">
+                    <% @new_reviews.reverse_each do |disp|%>
+                        <div class="card mb-3" style="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="<%= disp.image %>" class="img-thumbnail">
+                                       </div>  
+                                    <div class="col-8">  
+                                        <h5><%= disp.gadget_name %></h5>
+                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                </div><!--new_reviews-->
+                <div id="new_release_date" class="tab-pane">
+                    <% @new_release_date.reverse_each do |disp|%>
+                        <div class="card mb-3" style="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="<%= disp.image %>" class="img-thumbnail">
+                                       </div>  
+                                    <div class="col-8">  
+                                        <h5><%= disp.gadget_name %></h5>
+                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                </div><!--new_release_date-->
+                <div id="new_pfones" class="tab-pane">
+                    <% @phones.each do |disp|%>
+                        <div class="card mb-3" style="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="<%= disp.image %>" class="img-thumbnail" alt="test">
+                                       </div>  
+                                    <div class="col-8">  
+                                        <h5><%= disp.gadget_name %></h5>
+                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                </div><!--new_phones-->
+                <div id="new_pc" class="tab-pane">
+                    <% @pc.each do |disp|%>
+                        <div class="card mb-3" style="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="<%= disp.image %>" class="img-thumbnail" alt="test">
+                                       </div>  
+                                    <div class="col-8">  
+                                        <h5><%= disp.gadget_name %></h5>
+                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                </div><!--new_pc-->
+                <div id="new_other" class="tab-pane">
+                    <% @other.each do |disp|%>
+                        <div class="card mb-3" style="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="<%= disp.image %>" class="img-thumbnail" alt="test">
+                                       </div>  
+                                    <div class="col-8">  
+                                        <h5><%= disp.gadget_name %></h5>
+                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                </div><!--new_other-->
+            </div><!--tab-content-->
+        </div>
+        
+        <div class="col-3 bg-white pt-3 rounded">
+            <div class="card mb-3" style="">
+                <h5 class="card-header bg-white">注目記事</h5> 
+                <div class="card-body">
+                    <h5 class="card-title">注目ガジェット</h5>
+                    <h5 class="card-title">グッドランキング</h5>
+                    <h5 class="card-title">ガジェットランキング</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+        </div>    
+    </div>
+
+    <div class="row bg-light">
+        <div class="col-1"></div>      
+        <div class="col-7"><br> </div>
+        <div class="col-7"></div>
+    </div> 
+</div>
+ 
+
+
+   

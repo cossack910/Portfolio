@@ -1,0 +1,64 @@
+<%= stylesheet_link_tag 'adduserconfirm' %>
+<%= javascript_pack_tag 'adduserconfirm'%>
+<div class="container-fluid bg_color">
+<%= @mtestm %><br><%= @mtest %><br><%= @ptestp %><br><%= @ptest %>
+    <div class="row">
+        <div class="col-2"></div>
+            <div class="col-8 bg-white p-5">
+                <%= form_for @user, url: add_users_create_path do |f| %>
+                    <h5 class="text-center mb-5">新規登録</h5>
+                    <table class="ml-auto mr-auto">
+                        <tr>
+                            <th style="width:25%">ユーザー名</th>
+                            <td style="width:75%"  class="pl-2"><%= @user.user_name %></td>       
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <th style="width:25%">姓</th>
+                            <td style="width:75%" class="pl-2"><%= @user.last_name %></td>
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <th style="width:25%">名</th>
+                            <td style="width:75%" class="pl-2"><%= @user.first_name %></td>            
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <th style="width:25%">性別</th>
+                            <td style="width:75%" class="pl-2"><%= @user.gender %></td>            
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <th style="width:25%">誕生日</th>
+                            <td style="width:75%" class="pl-2"><%= @user.birthday %></td>            
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <th style="width:25%">メールアドレス</th>
+                            <td style="width:75%" class="pl-2"><%= @user.mail %></td>
+                        </tr>
+                        <tr><td><br></td></tr>
+                        <tr>
+                            <th style="width:25%">パスワード(debug)</th>
+                            <td style="width:75%" class="pl-2"><%= @user.password %></td>                    
+                        </tr>
+                    </table>
+                    <%= f.hidden_field :user_name, :value => @user.user_name %>
+                    <%= f.hidden_field :last_name, :value => @user.last_name %>
+                    <%= f.hidden_field :first_name, :value => @user.first_name %>
+                    <%= f.hidden_field :gender, :value => @user.gender %>
+                    <%= f.hidden_field :birthday, :value => @user.birthday %>
+                    <%= f.hidden_field :mail, :value => @user.mail %>
+                    <%= f.hidden_field :mail_sub, :value => @user.mail_sub %>
+                    <%= f.hidden_field :password, :value => @user.password %>
+                    <%= f.hidden_field :password_confirmation, :value => @user.password_confirmation %>
+                    <%= submit_tag("確定", class: "btn btn-danger mx-auto d-block w-50 mt-5")%>
+                <% end %>  
+                <hr>    
+            </div>
+        <div class="col-2"></div>    
+    </div>
+    <div class="row">
+   
+    </div>
+</div>

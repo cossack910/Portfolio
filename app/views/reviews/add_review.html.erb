@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <h5 class="text-center font-weight-bolder">レビュー内容をお書きください。</h5>
+        </div> 
+        <div class="col-1"></div>   
+    </div>
+    <br>
+    <div class="row">    
+        <div class="col-2"></div>
+        <div class="col-8">
+            <%= form_for @review, url: reviews_create_path(id: @gadget_id) do |f| %>
+                <label>良かった点をレビュー</label>
+                <div class="form-group"><%= f.text_area :good_review, size: "1000x5",class: "form-control" %></div>
+                <label>悪かった点をレビュー</label>
+                <div class="form-group"><%= f.text_area :bad_review, size: "1000x5",class: "form-control" %></div>                
+                <div class="form-group row">              
+                    <label class="btn btn-danger d-block mx-auto">画像をアップロード
+                        <span class="">
+                            ChooseFile<%= f.file_field :image, style: "display:none", class: "form-control-file" %>
+                        </span>
+                    </label>
+                </div> 
+                <%= f.hidden_field :empathy, :value => '0' %>   
+                <%= f.hidden_field :violation_flag, :value => '0' %>  
+                <%= f.hidden_field :gadget_id, :value => @gadget_id %>
+                <%= f.hidden_field :user_id, :value => current_user.id %>           
+                <%= submit_tag("送信", class: "btn btn-primary float-right mr-2")%>   
+                <input type="reset" value="リセット" class="btn btn-primary float-right mr-2"> 
+            <% end %>                     
+        </div>
+        <div class="col-2"></div>
+    </div>
+
