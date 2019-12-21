@@ -45,7 +45,7 @@
         <div class="col-7 bg-white pt-3 rounded">
             <div class="tab-content">
                 <div id="new_gadgets" class="tab-pane active">
-                    <% @gadget[0..4].each do |disp|%>
+                    <% @gadget.each do |disp|%>
                         <div class="card mb-3" style="">
                             <div class="card-body">
                                 <div class="row">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                     <% end %>
-                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                    <div class="text-muted font-weight-bolder float-right mb-2"><%= paginate @gadget %></div>
                 </div><!--new_gadgets-->
                 <div id="new_reviews" class="tab-pane">
                     <% @new_reviews.reverse_each do |disp|%>
@@ -83,7 +83,7 @@
                     <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
                 </div><!--new_reviews-->
                 <div id="new_release_date" class="tab-pane">
-                    <% @new_release_date.reverse_each do |disp|%>
+                    <% @new_release_date.each do |disp|%>
                         <div class="card mb-3" style="">
                             <div class="card-body">
                                 <div class="row">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     <% end %>
-                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                    <div class="text-muted font-weight-bolder float-right mb-2"><%= paginate @new_release_date %></div>
                 </div><!--new_release_date-->
                 <div id="new_pfones" class="tab-pane">
                     <% @phones.each do |disp|%>

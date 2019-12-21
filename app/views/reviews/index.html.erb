@@ -7,8 +7,12 @@
         <h4 class="text-center"><%= @gadget.gadget_name %></h4>
             <div class="mb-5">
                 <img border="1" src="<%= @gadget.image %>" height="250rem" alt="ガジェット画像" class= "d-block ml-auto mr-auto">
-                <p class="pt-4 pr-4 pl-4">製品情報:<br><%= @gadget.gadget_info %></p>
-                <p class="pr-4 pl-4">URL:<br><%= link_to @gadget.gadget_url %></p>
+                <p class="pt-4 pr-4 pl-4 card-text">製品情報:<br><%= @gadget.gadget_info %></p>
+                <% if @gadget.gadget_url.empty? %>
+                    <p class="pr-4 pl-4 card-text text-center">製品ページがありません。</p>
+                <% else %>
+                    <p class="pr-4 pl-4 card-text text-center"><%= link_to '製品ページへ行く', @gadget.gadget_url %></p>
+                <% end %>
                 <% if logged_in? %>
                     <%= link_to "レビューする", reviews_add_review_path(id: @gadget.id) ,class: "btn btn-primary d-block mx-auto"%>
                 <% else %>
