@@ -1,23 +1,28 @@
-<div class="row"><br></div>
+<div class="row">
+<div class="col-1"></div>
+<div class="col-10 h3 "><br><%= @title %></div>
+<div class="col-1"></div>
+</div>
 <div class="row">
 <div class="col-1"></div>
 <div class="col-10">
-<% @gadget[0..4].each do |disp|%>
+<% @gadget.each do |disp|%>
     <div class="card mb-3" style="">
         <div class="card-body">
             <div class="row">
-                <div class="col-4">
-                    <img src="<%= disp.image %>" class="img-thumbnail">
+                <div class="col-3">
+                    <img src="<%= disp.image %>" class="img-thumbnail d-block mx-auto">
                 </div>  
-                <div class="col-8">  
+                <div class="col-9">  
                     <h5><%= disp.gadget_name %></h5>
-                    <div id=""><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
+                    <p class="card-text">製品情報：<%= disp.gadget_info %></p>  
                 </div>
+                <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>        
             </div>
         </div>
     </div>
 <% end %>
+<div class="text-muted font-weight-bolder float-right mb-2"><%= paginate @gadget %></div> 
 </div>
 <div class="col-1"></div>
 </div>

@@ -55,16 +55,16 @@
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
                                         <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
                                     </div>
+                                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
                             </div>
                         </div>
                     <% end %>
-                    <div class="text-muted font-weight-bolder float-right mb-2"><%= paginate @gadget %></div>
+                    <%= link_to "新着ガジェットをもっと見る", tops_lists_path(gadgets: "new_gadgets") , class: "text-muted font-weight-bolder float-right mb-3 mr-2" %> 
                 </div><!--new_gadgets-->
                 <div id="new_reviews" class="tab-pane">
-                    <% @new_reviews.reverse_each do |disp|%>
+                    <% @new_reviews.each do |disp|%>
                         <div class="card mb-3" style="">
                             <div class="card-body">
                                 <div class="row">
@@ -74,13 +74,13 @@
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
                                         <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
                                     </div>
+                                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
                             </div>
                         </div>
                     <% end %>
-                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                    <%= link_to "新着レビューをもっと見る", tops_lists_path(gadgets: "new_reviews"), class: "text-muted font-weight-bolder float-right mb-3 mr-2" %> 
                 </div><!--new_reviews-->
                 <div id="new_release_date" class="tab-pane">
                     <% @new_release_date.each do |disp|%>
@@ -93,13 +93,13 @@
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
                                         <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
                                     </div>
+                                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
                             </div>
                         </div>
                     <% end %>
-                    <div class="text-muted font-weight-bolder float-right mb-2"><%= paginate @new_release_date %></div>
+                    <%= link_to "発売日順でもっとみる", tops_lists_path(gadgets: "new_release_date"), class: "text-muted font-weight-bolder float-right mb-2" %> 
                 </div><!--new_release_date-->
                 <div id="new_pfones" class="tab-pane">
                     <% @phones.each do |disp|%>
@@ -112,13 +112,13 @@
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
                                         <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
                                     </div>
+                                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
                             </div>
                         </div>
                     <% end %>
-                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                    <%= link_to "スマートホンをもっと見る", tops_lists_path(gadgets: "new_phones"), class: "text-muted font-weight-bolder float-right mb-2" %> 
                 </div><!--new_phones-->
                 <div id="new_pc" class="tab-pane">
                     <% @pc.each do |disp|%>
@@ -131,13 +131,13 @@
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
                                         <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
                                     </div>
+                                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
                             </div>
                         </div>
                     <% end %>
-                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                    <%= link_to "PC関連をもっと見る", tops_lists_path(gadgets: "new_pc"), class: "text-muted font-weight-bolder float-right mb-2" %> 
                 </div><!--new_pc-->
                 <div id="new_other" class="tab-pane">
                     <% @other.each do |disp|%>
@@ -150,13 +150,13 @@
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
                                         <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
-                                        <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary float-right mt-3"%>
                                     </div>
+                                    <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
                             </div>
                         </div>
                     <% end %>
-                    <%= link_to "next>>", "top", class: "text-muted font-weight-bolder float-right mb-2" %> 
+                    <%= link_to "その他をもっと見る", tops_lists_path(gadgets: "new_other"), class: "text-muted font-weight-bolder float-right mb-2" %> 
                 </div><!--new_other-->
             </div><!--tab-content-->
         </div>
