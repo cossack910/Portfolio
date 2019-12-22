@@ -29,7 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'bootstrap', '~>4.3.1'
-gem 'jquery-rails'
+#gem 'jquery-rails'
 #カミナリ
 gem 'kaminari'
 #画像アップロード

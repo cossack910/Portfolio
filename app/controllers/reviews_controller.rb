@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+
     def index
         key = params[:id]
         @gadget = Gadget.find(key)

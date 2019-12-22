@@ -1,0 +1,19 @@
+@import "bootstrap";  
+
+ .modal-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    margin: auto;
+    pointer-events: none;
+  }
+  
+  .modal-content{
+    pointer-events: all;
+  }
+
+  .bar_color{
+    //background-color: #000080;
+    background-color: #191970;
+  }
