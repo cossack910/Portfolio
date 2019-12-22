@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   post 'other_add/create', to: 'other_add#create'
   get 'other_add/edit', to: 'other_add#edit'
   patch 'other_add/update', to: 'other_add#update'
-
+  get 'other_add/test', tp: 'other_add#test'
 end

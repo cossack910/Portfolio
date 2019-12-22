@@ -20,6 +20,10 @@ class OtherAddController < ApplicationController
         redirect_to '/other_add' 
     end
 
+    def test
+        
+    end
+
     private
     def gadget_params
         params.require(:gadget).permit(:gadget_name, :gadget_info, :gadget_url, :category_id, :image, :release_date)

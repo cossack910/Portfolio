@@ -21,9 +21,7 @@
                             ChooseFile<%= f.file_field :image, style: "display:none", class: "form-control-file" %>
                         </span>
                     </label>
-                </div> 
-                <%= f.hidden_field :empathy, :value => '0' %>   
-                <%= f.hidden_field :violation_flag, :value => '0' %>  
+                </div>   
                 <%= f.hidden_field :gadget_id, :value => @gadget_id %>
                 <%= f.hidden_field :user_id, :value => current_user.id %>           
                 <%= submit_tag("送信", class: "btn btn-primary float-right mr-2")%>   
