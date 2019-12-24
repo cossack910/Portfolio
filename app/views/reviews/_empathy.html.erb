@@ -1,0 +1,15 @@
+<div class="row ml-auto mt-3">
+<% if logged_in? %>  
+    <% if Empathy.find_by(user_id: current_user.id, review_id: disp.id) %>
+        <%= link_to empathies_delete_path(review_id: disp.id),method: :delete, remote: true do %>
+            <button id="good_mark" class="btn mr-3">★<%= disp.empathies.length %></button>
+        <% end %>
+    <% else %>   
+        <%= link_to empathies_create_path(review_id: disp.id), method: :post, remote: true do %>  
+            <button id="good_mark" class="btn mr-3">☆<%= disp.empathies.length %></button>
+        <% end %>
+    <% end %>
+<% else%>
+    <button id="good_mark" class="btn mr-3">☆<%= disp.empathies.length %></button>
+<% end %>
+</div>

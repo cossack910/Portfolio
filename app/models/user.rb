@@ -10,7 +10,7 @@ class User < ApplicationRecord
     has_secure_password
 
     has_many :reviews
-    has_many :empthies
+    has_many :empathies
 
     # 与えられた文字列のハッシュ値を返す 
     def User.digest(string)

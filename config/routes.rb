@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   post 'reviews', to: 'reviews#index'
   get 'reviews/add_review', to: 'reviews#add_review'
   post 'reviews/create', to: 'reviews#create'
+  #empathies
+  post 'empathies/create', to: 'empathies#create'
+  delete 'empathies/delete', to: 'empathies#delete'
 
   #login
   get 'login', to: 'login#index'
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
   #profile
   get 'profiles', to: 'profiles#index'
   get 'profiles/edit', to: 'profiles#edit'
-  get 'profiles/delete', to: 'profiles#delete'
+  post 'profiles/delete', to: 'profiles#delete'
 
   #other_add
   get 'other_add', to: 'other_add#index'

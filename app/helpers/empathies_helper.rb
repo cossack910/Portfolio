@@ -1,0 +1,2 @@
+module EmpathiesHelper
+end
