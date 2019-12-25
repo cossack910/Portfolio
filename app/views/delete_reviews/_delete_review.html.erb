@@ -6,8 +6,8 @@
             </div>
             <div class="card-header bg-white mb-1 border-0">
                 <div class="row">
-                    <div class="col-8"><img src="guest.png" class="" width="30" height="30"></img>
-                    <span class="ml-3"><%=  @username %></span></div>     
+                    <div class="col-8"><img src="<%= current_user.user_image %>" class="" width="30" height="auto"></img>
+                    <span class="ml-3"><%= current_user.user_name %></span></div>     
                     <div class="col-4 text-right "><%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %></div>
                 </div>    
             </div><!--card-header-->

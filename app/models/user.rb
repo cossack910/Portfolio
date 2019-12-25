@@ -8,6 +8,7 @@ class User < ApplicationRecord
     validates :mail_sub, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 },format: { with: VALID_EMAIL_REGEX }
     validates :password_digest, presence: true, uniqueness: true, length: { minimum: 8 }
     has_secure_password
+    mount_uploader :user_image, ImageUploader
 
     has_many :reviews
     has_many :empathies

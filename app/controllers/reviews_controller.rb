@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
     def index
         key = params[:id]
         @gadget = Gadget.find(key)
-        @reviews = Review.joins("INNER JOIN users ON users.id = reviews.user_id").select("users.user_name , reviews.*").where(reviews: { gadget_id: key})
+        @reviews = Review.joins("INNER JOIN users ON users.id = reviews.user_id").select("users.user_name ,users.user_image, users.id AS ID, reviews.*").where(reviews: { gadget_id: key})
         @test = @reviews.empty? 
     end
 

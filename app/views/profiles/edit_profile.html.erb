@@ -1,0 +1,66 @@
+<div class="container-fluid">
+<div class="row bg-light"><br><br></div>
+<%= form_for @user, url: profiles_update_path do |f| %>
+<div class="row bg-light">
+    <div class="col-1"></div>
+    <div class="col-4">
+        <div class="bg-white p-3">
+            <h5 class=""><%= current_user.user_name %></h5>
+            <div class="bg-light mt-3 mb-4">
+            <% if current_user.user_image.blank? %>
+                <br><br><br><br><br><br><br><br><br>
+            <% else %>
+                <img src="<%= current_user.user_image %>" class="img-responsive mx-auto d-block img-thumbnail">
+            <% end %>
+            </div>
+            <%= f.file_field :user_image %>
+        </div>
+    </div>
+    <div class="col-6 bg-white">
+                <table class="ml-auto mr-auto mt-5 mb-5 ">
+                    <tr>                       
+                        <th style="width:25%">ユーザー名</th>
+                        <td style="width:75%" colspan="2">
+                        <%= f.text_field :user_name, class: "form-control col-8 ml-2", style: "",placeholder: "ユーザー名",id: "user_name_add" %>
+                        </td>                                   
+                    </tr>
+                    <tr><td><br></td></tr>
+                    <tr>                        
+                        <th style="width:25%">性別</th>
+                        <td style="width:75%" class="pl-2" colspan="2">
+                            <%= f.radio_button :gender, "男性",checked: true %>
+                            <%= f.label :gender_man, "男性" %>
+                            <%= f.radio_button :gender, "女性" %>
+                            <%= f.label :gender_women, "女性" %>
+                            <%= f.radio_button :gender, "その他" %>
+                            <%= f.label :gender_others, "その他" %>
+                        </td>                                       
+                    </tr>
+                    <tr><td><br></td></tr>
+                    <tr>                        
+                        <th style="width:25%">生年月日</th>
+                        <td style="width:75%" colspan="2">
+                            <%= f.text_field :birthday, class: "form-control col-8 ml-2", placeholder: "1990年1月05日→19900105",id: "birthday_add" %>
+                        </td>                                     
+                    </tr>
+                    <tr><td></td><td colspan="2"><div id="miss_birthday" class="m-1 alert" ></div></td></tr>      
+                    <tr>                       
+                        <th style="width:25%">メールアドレス</th>
+                        <td style="width:75%" colspan="2">
+                        <%= f.text_field :mail, class: "form-control col-8 ml-2",placeholder: "メールアドレス", onBlur: "seikicheck();",id: "mail_add1" %>
+                        </td>                         
+                    </tr>
+                    <tr><td></td><td colspan="2"><div id="miss_mail1" class="m-1 alert" ></div></td></tr>
+                    <tr>                       
+                        <th style="width:25%">メールアドレス確認</th>
+                        <td style="width:75%" colspan="2">
+                        <%= f.text_field :mail_sub, class: "form-control col-8 ml-2", placeholder: "メールアドレス確認", onBlur: "mailcheck();",id: "mail_add2" %>
+                        </td>                             
+                    </tr>
+                </table>
+                <%= submit_tag("アカウント情報変更", class: "btn btn-danger mx-auto d-block w-50 mt-5", onClick: "return check();") %>         
+         <% end %>
+    </div>
+    <div class="col-1"></div>
+</div>
+</div>

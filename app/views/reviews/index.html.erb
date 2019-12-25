@@ -43,7 +43,12 @@
                         <div class="card-body">
                             <div class="card-header bg-white mb-1 border-0">
                                 <div class="row">
-                                    <div class="col-8"><img src="guest.png" class="" width="30" height="30"></img>
+                                    <div class="col-8">
+                                    <% if disp.user_image.blank? %>
+                                        <img src="guest.png" class="" width="30" height="auto">
+                                    <% else %>    
+                                        <img src="uploads/user/user_image/<%= disp.ID %>/<%= disp.user_image %>" class="" width="30" height="auto">
+                                    <% end %>
                                     <span class="ml-3"><%= disp.user_name %></span></div>     
                                     <div class="col-4 text-right "><%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %></div>
                                 </div>    
