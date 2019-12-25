@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   #profile
   get 'profiles', to: 'profiles#index'
   get 'profiles/edit', to: 'profiles#edit'
-  post 'profiles/delete', to: 'profiles#delete'
+  #delere_reviews
+  put 'delete_reviews/update', to: 'delete_reviews#update'
 
   #other_add
   get 'other_add', to: 'other_add#index'

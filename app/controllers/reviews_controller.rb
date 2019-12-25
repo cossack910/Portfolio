@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
 
     private
     def review_add_params
-        params.require(:review).permit(:good_review, :bad_review, :user_id, :gadget_id, :image)
+        params.require(:review).permit(:good_review, :bad_review, :user_id, :gadget_id, :image, :delete_flag)
     end
 
 end

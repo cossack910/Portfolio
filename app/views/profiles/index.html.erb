@@ -5,88 +5,17 @@
     <div class="col-1"></div>
     <div class="col-4">
         <div class="bg-white p-3">
-            <h5 class=""><%= @username %></h5>
+            <h5 class=""><%= current_user.user_name %></h5>
             <div class="bg-light mt-3 mb-4"><br><br><br><br><br><br><br><br><br></div>
             <%= link_to "登録情報変更", profiles_edit_path ,class: "btn btn-primary form-control"%>
         </div>
     </div>
     <div class="col-6 bg-white">
-    <h5 class="text-center mt-3"><%=  @username %>さんの投稿履歴</h5>
-        <% @reviews.each do |disp|%>
-            <div class="card border-0 bg-white">
-                <div class="card-body">
-                <div class="text-center">
-                <span>投稿したガジェット：</span><span class="ml-2"><%= link_to disp.gadget_name, reviews_path(id: disp.gadget_id)  %></span>
-                </div>
-                    <div class="card-header bg-white mb-1 border-0">
-                        <div class="row">
-                            <div class="col-8"><img src="guest.png" class="" width="30" height="30"></img>
-                            <span class="ml-3"><%=  @username %></span></div>     
-                            <div class="col-4 text-right "><%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %></div>
-                        </div>    
-                    </div>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a href="#good_point<%= disp.id %>" class="nav-link active" data-toggle="tab">良かった点</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="#bad_point<%= disp.id %>" class="nav-link text-danger" data-toggle="tab">悪かった点</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#image<%= disp.id %>" class="nav-link text-muted" data-toggle="tab">画像</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content border-bottom border-left border-right rounded-bottom">
-                        <div id="good_point<%= disp.id %>" class="tab-pane active">
-                            <div class="mb-1"> 
-                                <div class="card-body">
-                                    <p class="card-text mt-3">
-                                    <%= disp.good_review %>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="bad_point<%= disp.id %>" class="tab-pane">
-                            <div class="mb-1">
-                                <div class="card-body">
-                                    <p class="card-text mt-3">
-                                    <%= disp.bad_review %>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="image<%= disp.id %>" class="tab-pane">
-                            <div class="mb-1">
-                                <div class="card-body">
-                                <img src="<%= disp.image %>" class="img-responsive mx-auto d-block img-thumbnail">
-                                </div>
-                            </div>
-                        </div>
-                    </div>     
-                <div class="text-right mt-3">
-                    <span class="mr-3"><label>共感された数：<%= disp.empathies.length %></span></label>
-                    <button type="button" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#DeleteAlertModal">削除</button>       
-                </div>
-            </div> 
-            <hr>  
-            <!--モーダル-->
-            <div class="modal" id="DeleteAlertModal" tabindex="-1" role="dialog" aria-labelledby="DeleteAlertModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5>本当にレビューを削除しますか？</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times</span>
-                    </button>
-                    </div><!--モーダルヘッダー-->
-                    <div class="modal-footer">
-                        <%= link_to "削除する", profiles_delete_path(id: disp.id) ,class: "btn btn-danger ml-auto"%> 
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
-                    </div>
-                </div><!--モーダルコンテンツ-->
-            </div><!--モーダルダイアログ本体-->
-            </div><!--モーダル外枠-->
-            <!--モーダル-->
+        <h5 class="text-center mt-3"><%= current_user.user_name %>さんの投稿履歴</h5>
+        <% @reviews.each do |disp| #ユーザーが過去に投稿したレビューを表示する。 %>
+            <div id="review-<%= disp.id %>">
+                <%= render :partial => "delete_reviews/delete_review", :locals => { disp: disp } %>
+            </div>             
         <% end %>
     </div>
     <div class="col-1"></div>

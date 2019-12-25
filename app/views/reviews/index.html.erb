@@ -37,61 +37,63 @@
                 </div>
             </div>    
             <% end %>
-            <% @reviews.reverse_each do |disp|%>
-            <div class="card border-0 bg-white">
-                <div class="card-body">
-                    <div class="card-header bg-white mb-1 border-0">
-                        <div class="row">
-                            <div class="col-8"><img src="guest.png" class="" width="30" height="30"></img>
-                            <span class="ml-3"><%= disp.user_name %></span></div>     
-                            <div class="col-4 text-right "><%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %></div>
-                        </div>    
-                    </div>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a href="#good_point<%= disp.id %>" class="nav-link active" data-toggle="tab">良かった点</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="#bad_point<%= disp.id %>" class="nav-link text-danger" data-toggle="tab">悪かった点</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#image<%= disp.id %>" class="nav-link text-muted" data-toggle="tab">画像</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content border-bottom border-left border-right rounded-bottom">
-                        <div id="good_point<%= disp.id %>" class="tab-pane active">
-                            <div class="mb-1"> 
-                                <div class="card-body">
-                                    <p class="card-text mt-3">
-                                    <%= disp.good_review %>
-                                    </p>
+            <% @reviews.reverse_each do |disp| #レビューを表示する %>
+                <% if disp.delete_flag == 0  #delete_falgが0のレビューだけを表示する。 %>
+                    <div class="card border-0 bg-white">
+                        <div class="card-body">
+                            <div class="card-header bg-white mb-1 border-0">
+                                <div class="row">
+                                    <div class="col-8"><img src="guest.png" class="" width="30" height="30"></img>
+                                    <span class="ml-3"><%= disp.user_name %></span></div>     
+                                    <div class="col-4 text-right "><%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %></div>
+                                </div>    
+                            </div>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a href="#good_point<%= disp.id %>" class="nav-link active" data-toggle="tab">良かった点</a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a href="#bad_point<%= disp.id %>" class="nav-link text-danger" data-toggle="tab">悪かった点</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#image<%= disp.id %>" class="nav-link text-muted" data-toggle="tab">画像</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content border-bottom border-left border-right rounded-bottom">
+                                <div id="good_point<%= disp.id %>" class="tab-pane active">
+                                    <div class="mb-1"> 
+                                        <div class="card-body">
+                                            <p class="card-text mt-3">
+                                            <%= disp.good_review %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="bad_point<%= disp.id %>" class="tab-pane">
+                                    <div class="mb-1">
+                                        <div class="card-body">
+                                            <p class="card-text mt-3">
+                                            <%= disp.bad_review %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="image<%= disp.id %>" class="tab-pane">
+                                    <div class="mb-1">
+                                        <div class="card-body">
+                                        <img src="<%= disp.image %>" class="img-responsive mx-auto d-block img-thumbnail">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        <div class="btn-toolbar" id="foot-<%= disp.id %>">
+                            <%= render :partial => "empathies/empathy", :locals => { disp: disp } %> 
+                        </div><!--btn-toolbar-->    
                         </div>
-                        <div id="bad_point<%= disp.id %>" class="tab-pane">
-                            <div class="mb-1">
-                                <div class="card-body">
-                                    <p class="card-text mt-3">
-                                    <%= disp.bad_review %>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="image<%= disp.id %>" class="tab-pane">
-                            <div class="mb-1">
-                                <div class="card-body">
-                                <img src="<%= disp.image %>" class="img-responsive mx-auto d-block img-thumbnail">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <div class="btn-toolbar" id="foot-<%= disp.id %>">
-                    <%= render :partial => "empathy", :locals => { disp: disp } %> 
-                </div><!--btn-toolbar-->    
-                </div>
-            </div> 
-            <hr>
-            <% end %>   
+                    </div> 
+                    <hr>
+                <% end #delete_falgが0のレビューだけを表示する %>    
+            <% end #レビューを表示する %>  
         </div>
         <div class="col-1"></div>
     </div>
