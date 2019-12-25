@@ -50,7 +50,7 @@
             </div><!--tab-content-->
         </div><!--card-body-->      
         <div class="text-right mt-3">
-            <span class="mr-3"><label>共感された数：<%= disp.empathies.length %></span></label>
+            <span class="mr-3"><label>共感された数：<%= disp.empathies.length %></span></label>        
             <button type="button" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#DeleteAlertModal<%= disp.id %>">削除</button>       
         </div>
     </div><!--card--> 
@@ -67,7 +67,7 @@
                 </div><!--モーダルヘッダー-->
                 <div class="modal-footer">
                     <%= link_to delete_reviews_update_path(id: disp.id) ,class: "btn btn-danger ml-auto" , method: :put, remote: true do %> 
-                    削除する
+                    <div data-dismiss="modal">削除する</div>
                     <% end %>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
                 </div>
