@@ -12,8 +12,21 @@ class ProfilesController < ApplicationController
         redirect_to profiles_path 
     end
 
+    def pass
+        @user = User.new
+    end
+
+    def pass_update
+        User.find(current_user.id).update(pass_update_params)
+        redirect_to profiles_path 
+    end
+
     private
     def profile_update_params
         params.require(:user).permit(:user_name, :birthday, :gender, :mail, :mail_sub, :user_image)
+    end
+
+    def pass_update_params
+        params.require(:user).permit(:password, :password_confirmation)
     end
 end
