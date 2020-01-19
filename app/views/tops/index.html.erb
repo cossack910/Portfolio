@@ -163,12 +163,31 @@
         
         <div class="col-3 bg-white pt-3 rounded">
             <div class="card mb-3" style="">
-                <h5 class="card-header bg-white">注目記事</h5> 
+                <h5 class="card-header bg-white">注目ガジェット</h5> 
                 <div class="card-body">
-                    <h5 class="card-title">注目ガジェット</h5>
-                    <h5 class="card-title">グッドランキング</h5>
-                    <h5 class="card-title">ガジェットランキング</h5>
+                    <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
+                    <% @review_num.each.with_index(1) do |disp, i|%>
+                    <h5>第 <%= i %> 位<br>
+                    <%= link_to disp.gadget_name, reviews_path(id: disp.id) %></h5>
+                    <% end %>
+                    <hr>
                 </div>
+            </div>
+            <div class="card mb-3" style="">
+                <h5 class="card-header bg-white">注目ユーザー</h5>
+                <div class="card-body">
+                    <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
+                    <% @user_review_num.each.with_index(1) do |disp, i|%>
+                    <h5>第 <%= i %> 位<br>
+                    <%= link_to disp.user_name, reviews_path(id: disp.id) %></h5>
+                    <% end %>
+                    <hr>
+                    <h4 class="card-title font-weight-bolder">役に立った数ランキング</h4>
+                    <% @user_good_num.each.with_index(1) do |disp, i|%>
+                    <h5>第 <%= i %> 位<br>
+                    <%= link_to disp.user_name, reviews_path(id: disp.id) %></h5>
+                    <% end %>
+                </div>    
             </div>
         </div>
         <div class="col-1">
