@@ -171,6 +171,11 @@
                     <%= link_to disp.gadget_name, reviews_path(id: disp.id) %></h5>
                     <% end %>
                     <hr>
+                    <h4 class="card-title font-weight-bolder">総合評価ランキング</h4>
+                    <% @gadget_num.each.with_index(1) do |disp, i|%>
+                    <h5>第 <%= i %> 位<br>
+                    <%= link_to disp.gadget_name, reviews_path(id: disp.id) %></h5>
+                    <% end %>
                 </div>
             </div>
             <div class="card mb-3" style="">

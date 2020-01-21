@@ -12,6 +12,12 @@
         <h4 class="text-center"><%= @gadget.gadget_name %></h4>
             <div class="mb-5">
                 <img border="1" src="<%= @gadget.image %>" height="250rem" alt="ガジェット画像" class= "d-block ml-auto mr-auto">
+                <% if @gadget.review_point != nil %>
+                <div class="text-center h5 mt-3">
+                    総合評価点：<%= @gadget.review_point.round(2) %>/5.00<br>
+                    <span class="rate rate<%= (@gadget.review_point.round(1) * 10).floor %>"></span>  
+                </div>   
+                <% end %>               
                 <p class="pt-4 pr-4 pl-4 card-text">製品情報:<br><%= @gadget.gadget_info %></p>
                 <% if @gadget.gadget_url.empty? %>
                     <p class="pr-4 pl-4 card-text text-center">製品ページがありません。</p>
@@ -43,15 +49,25 @@
                         <div class="card-body">
                             <div class="card-header bg-white mb-1 border-0">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-6">
                                     <% if disp.user_image.blank? %>
                                         <img src="guest.png" class="" width="30" height="auto">
                                     <% else %>    
                                         <img src="uploads/user/user_image/<%= disp.ID %>/<%= disp.user_image %>" class="" width="30" height="auto">
                                     <% end %>
-                                    <span class="ml-3"><%= disp.user_name %></span></div>     
-                                    <div class="col-4 text-right "><%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %></div>
+                                    <span class="ml-3"><%= disp.user_name %></span></div>
+                                    <div class="col-6 text-right">
+                                    投稿日時：<%= disp.updated_at.strftime("%Y/%m/%d/%H:%M") %>
+                                    </div>
                                 </div>    
+                                <div class="row">
+                                    <% if disp.review_point != nil %>
+                                        <div class="col text-right">
+                                        評価点：<%= disp.review_point.round(2) %>/5.00<br>
+                                        <span class="rate rate<%= (disp.review_point.round(1) * 10).floor %>"></span>
+                                        </div>
+                                    <% end %>
+                                </div>
                             </div>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">

@@ -17,3 +17,80 @@
     //background-color: #000080;
     background-color: #191970;
   }
+
+  .rate {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    font-size: 20px;
+  }
+  .rate:before, .rate:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '★★★★★';
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+  }
+  .rate:before {
+    color: #ddd; /*星色*/
+  }
+  .rate:after {
+    color: #ffa500;
+    overflow: hidden;
+    white-space: nowrap; /*重要*/
+  }
+  
+  .rate0:after{width: 0;}
+  .rate1:after{width: 2px;}
+  .rate2:after{width: 4px;}
+  .rate3:after{width: 6px;}
+  .rate4:after{width: 8px;}
+  .rate5:after{width: 10px;}
+  .rate6:after{width: 12px;}
+  .rate7:after{width: 14px;}
+  .rate8:after{width: 16px;}
+  .rate9:after{width: 18px;}
+  .rate10:after{width: 20px;}
+  .rate11:after{width: 22px;}
+  .rate12:after{width: 24px;}
+  .rate13:after{width: 26px;}
+  .rate14:after{width: 28px;}
+  .rate15:after{width: 30px;}
+  .rate16:after{width: 32px;}
+  .rate17:after{width: 34px;}
+  .rate18:after{width: 36px;}
+  .rate19:after{width: 38px;}
+  .rate20:after{width: 40px;}
+  .rate21:after{width: 42px;}
+  .rate22:after{width: 44px;}
+  .rate23:after{width: 46px;}
+  .rate24:after{width: 48px;}
+  .rate25:after{width: 50px;}
+  .rate26:after{width: 52px;}
+  .rate27:after{width: 54px;}
+  .rate28:after{width: 56px;}
+  .rate29:after{width: 58px;}
+  .rate30:after{width: 60px;}
+  .rate31:after{width: 62px;}
+  .rate32:after{width: 64px;}
+  .rate33:after{width: 66px;}
+  .rate34:after{width: 68px;}
+  .rate35:after{width: 70px;}
+  .rate36:after{width: 72px;}
+  .rate37:after{width: 74px;}
+  .rate38:after{width: 76px;}
+  .rate39:after{width: 78px;}
+  .rate40:after{width: 80px;}
+  .rate41:after{width: 82px;}
+  .rate42:after{width: 84px;}
+  .rate43:after{width: 86px;}
+  .rate44:after{width: 88px;}
+  .rate45:after{width: 90px;}
+  .rate46:after{width: 92px;}
+  .rate47:after{width: 94px;}
+  .rate48:after{width: 96px;}
+  .rate49:after{width: 98px;}
+  .rate50:after{width: 100px;}
