@@ -5,8 +5,8 @@ class ReviewsController < ApplicationController
         @gadget = Gadget.find(key)
         @reviews = Review.joins("INNER JOIN users ON users.id = reviews.user_id").select("users.user_name ,users.user_image, users.id AS ID, reviews.*").where(reviews: { gadget_id: key})
         @test = @reviews.empty? 
-        our_input_text = " heart"
-        @heart = `python lib/assets/python/heart.py "#{our_input_text}"`
+        # our_input_text = " heart"
+        # @heart = `python lib/assets/python/heart.py "#{our_input_text}"`
     end
 
     def add_review
@@ -18,8 +18,11 @@ class ReviewsController < ApplicationController
         if request.post? then
             gadget_id = params[:id]
             Review.create(review_add_params)
+            @review_point = Review.order(updated_at: :desc).limit(1)
+            p_point = `python lib/assets/python/review_point.py`
+            @review_point.update(review_point: p_point)
+            g_point = `python lib/assets/python/gadget_point.py "#{gadget_id}"`
         end
-        @add_point = `python lib/assets/python/review_point.py`
         redirect_to reviews_path(id: gadget_id)
     end
 

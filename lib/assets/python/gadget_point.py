@@ -1,6 +1,9 @@
 import MySQLdb
 from janome.tokenizer import Tokenizer
 import codecs
+import sys
+
+input = sys.argv[1]
 
 try:
     # データベースへの接続とカーソルの生成
@@ -11,11 +14,11 @@ try:
         db='review',
         charset='utf8')
     cursor = connection.cursor()
-
-    cursor.execute("SELECT good_review,bad_review FROM reviews WHERE id = (select max(id) from reviews)")
+    
+    cursor.execute("SELECT good_review,bad_review FROM reviews WHERE gadget_id = %s" % input)
     # fetchall()で全件取り出し
     rows = cursor.fetchall()
-    
+    #print(rows)
     txt = []
     for row in rows:
         txt += list(row)
@@ -47,6 +50,8 @@ try:
         tokens = naive_tokenizer.tokenize(text)
         element = CorpusElement(text, tokens)
         naive_corpus.append(element)
+    # for token in naive_corpus[0].tokens:
+    #     print(token)    
         
     def load_pn_dict():
         dic = {}
@@ -72,6 +77,7 @@ try:
 
     # 感情極性対応表のロード
     pn_dic = load_pn_dict()
+    #print(pn_dic['良い'])
 
     # 各文章の極性値リストを得る
     for element in naive_corpus:
@@ -79,13 +85,19 @@ try:
 
     sum_average = 0
     num = 0
+    print("平均値が最も高い順に表示")
     for element in sorted(naive_corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
+        #print('Average: {:.3f}'.format(sum(element.pn_scores)/len(element.pn_scores)))
         sum_average += sum(element.pn_scores)/len(element.pn_scores)
         num += 1
+    # print(sum_average)
+    # print(num)
+    #print(5 * (1 + sum_average/num))
 
     # SQLクエリ実行（データ更新）
     f_num = 5 * (1 + sum_average/num)
     print(f_num)
+    cursor.execute('UPDATE gadgets SET review_point = %f WHERE id = %s' % (f_num, input))
         
     # 保存を実行
     connection.commit()
@@ -93,7 +105,7 @@ try:
     # 接続を閉じる
     connection.close()
 except MySQLdb.Error as ex:
-    print('0')
+    print('MySQL Error: ', ex)
 
 
 
