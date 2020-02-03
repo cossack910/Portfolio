@@ -50,8 +50,6 @@ try:
         tokens = naive_tokenizer.tokenize(text)
         element = CorpusElement(text, tokens)
         naive_corpus.append(element)
-    # for token in naive_corpus[0].tokens:
-    #     print(token)    
         
     def load_pn_dict():
         dic = {}
@@ -60,7 +58,6 @@ try:
             lines = f.readlines()
             
             for line in lines:
-                # 各行は"良い:よい:形容詞:0.999995"
                 columns = line.split(':')
                 dic[columns[0]] = float(columns[3])      
         return dic
@@ -77,7 +74,6 @@ try:
 
     # 感情極性対応表のロード
     pn_dic = load_pn_dict()
-    #print(pn_dic['良い'])
 
     # 各文章の極性値リストを得る
     for element in naive_corpus:
@@ -87,12 +83,8 @@ try:
     num = 0
     print("平均値が最も高い順に表示")
     for element in sorted(naive_corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
-        #print('Average: {:.3f}'.format(sum(element.pn_scores)/len(element.pn_scores)))
         sum_average += sum(element.pn_scores)/len(element.pn_scores)
         num += 1
-    # print(sum_average)
-    # print(num)
-    #print(5 * (1 + sum_average/num))
 
     # SQLクエリ実行（データ更新）
     f_num = 5 * (1 + sum_average/num)

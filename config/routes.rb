@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'reviews', to: 'reviews#index'
   get 'reviews/add_review', to: 'reviews#add_review'
   post 'reviews/create', to: 'reviews#create'
+  get 'reviews/detail', to: 'reviews#detail'
+  post 'reviews/detail', to: 'reviews#detail'
   #empathies
   post 'empathies/create', to: 'empathies#create'
   delete 'empathies/delete', to: 'empathies#delete'

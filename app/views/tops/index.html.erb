@@ -4,7 +4,8 @@
             <div class="jumbotron jumbotron-fluid col-10 mb-0">
                 <div class="container-fluid" >
                     <h3 class="text-white font-weight-bolder ml-5">やぁ!</h3> 
-                    <p class="lead text-white ml-5">表裏一体そんな観点からあなたのガジェットをレビューしてみませんか？</p>
+                    <p class="lead text-white ml-5">モノの良し悪しは表裏一体そんな観点からあなたのガジェットをレビューしてみませんか？</p>
+                    <button type="button" class="btn btn-warning text-danger ml-5 font-weight-bolder" data-toggle="modal" data-target="#TIPSModal">投稿方法!!</button>                  
                 </div>   
             </div><!-- /.jumbotron--> 
         <div class="col-1"></div>
@@ -163,7 +164,7 @@
         
         <div class="col-3 bg-white pt-3 rounded">
             <div class="card mb-3" style="">
-                <h5 class="card-header bg-white">注目ガジェット</h5> 
+                <h5 class="card-header bg-white text-danger font-weight-bolder">注目ガジェット</h5> 
                 <div class="card-body">
                     <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
                     <% @review_num.each.with_index(1) do |disp, i|%>
@@ -179,18 +180,18 @@
                 </div>
             </div>
             <div class="card mb-3" style="">
-                <h5 class="card-header bg-white">注目ユーザー</h5>
+                <h5 class="card-header bg-white text-danger font-weight-bolder">注目ユーザー</h5>
                 <div class="card-body">
                     <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
                     <% @user_review_num.each.with_index(1) do |disp, i|%>
                     <h5>第 <%= i %> 位<br>
-                    <%= link_to disp.user_name, reviews_path(id: disp.id) %></h5>
+                    <%= link_to disp.user_name, tops_path %></h5>
                     <% end %>
                     <hr>
                     <h4 class="card-title font-weight-bolder">役に立った数ランキング</h4>
                     <% @user_good_num.each.with_index(1) do |disp, i|%>
                     <h5>第 <%= i %> 位<br>
-                    <%= link_to disp.user_name, reviews_path(id: disp.id) %></h5>
+                    <%= link_to disp.user_name, tops_path %></h5>
                     <% end %>
                 </div>    
             </div>
@@ -201,9 +202,30 @@
 
     <div class="row bg-light">
         <div class="col-1"></div>      
-        <div class="col-7"><br> </div>
+        <div class="col-7"><br></div>
         <div class="col-7"></div>
     </div> 
+
+        <!--モーダル-->
+        <div class="modal" id="TIPSModal" tabindex="-1" role="dialog" aria-labelledby="TIPSModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+              <h5>TIPS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times</span>
+                </button>
+              </div><!--モーダルヘッダー-->
+              <div class="modal-body">
+                投稿方法と評価方法
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
+              </div>
+            </div><!--モーダルコンテンツ-->
+          </div><!--モーダルダイアログ本体-->
+        </div><!--モーダル外枠-->
+      <!--モーダル-->
 </div>
  
 

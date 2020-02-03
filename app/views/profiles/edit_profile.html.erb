@@ -8,7 +8,7 @@
             <h5 class=""><%= current_user.user_name %></h5>
             <div class="bg-light mt-3 mb-4">
             <% if current_user.user_image.blank? %>
-                <img src="guest.png" class="img-responsive mx-auto d-block img-thumbnail">
+                初期設定です。
             <% else %>
                 <img src="<%= current_user.user_image %>" class="img-responsive mx-auto d-block img-thumbnail">
             <% end %>

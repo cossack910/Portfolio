@@ -55,7 +55,6 @@ try:
             lines = f.readlines()
             
             for line in lines:
-                # 各行は"良い:よい:形容詞:0.999995"
                 columns = line.split(':')
                 dic[columns[0]] = float(columns[3])      
         return dic
