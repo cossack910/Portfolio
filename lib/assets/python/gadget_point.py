@@ -88,7 +88,8 @@ try:
 
     # SQLクエリ実行（データ更新）
     f_num = 5 * (1 + sum_average/num)
-    print(f_num)
+    if f_num > 5:
+        f_num = 5
     cursor.execute('UPDATE gadgets SET review_point = %f WHERE id = %s' % (f_num, input))
         
     # 保存を実行

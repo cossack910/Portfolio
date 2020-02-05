@@ -84,6 +84,8 @@ try:
 
     # SQLクエリ実行（データ更新）
     f_num = 5 * (1 + sum_average/num)
+    if f_num > 5:
+        f_num = 5 
     print(f_num)
         
     # 保存を実行

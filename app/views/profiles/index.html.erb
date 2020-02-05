@@ -24,9 +24,7 @@
         <div class="col-6 bg-white">
             <h5 class="text-center mt-3"><%= current_user.user_name %>さんの投稿履歴</h5>
             <% @reviews.each do |disp| #ユーザーが過去に投稿したレビューを表示する。 %>
-                <div id="review-<%= disp.id %>">
-                    <%= render :partial => "delete_reviews/delete_review", :locals => { disp: disp } %>
-                </div>             
+                <%= render :partial => "delete_reviews/delete_review", :locals => { disp: disp } %>           
             <% end %>
         </div>
         <div class="col-1"></div>
