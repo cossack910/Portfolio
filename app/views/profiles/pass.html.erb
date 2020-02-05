@@ -28,7 +28,7 @@
                     <!--モーダル-->
                 <% end %>  
                 <hr>    
-                <a href="profiles" class="btn btn-primary mx-auto d-block w-50 m-3">プロフィールへ戻る</a>
+                <%= link_to "プロフィールへ戻る", profiles_path(id: current_user.id) ,class: "btn btn-primary mx-auto d-block w-50 m-3"%>
             </div>
         <div class="col-2"></div>    
     </div>

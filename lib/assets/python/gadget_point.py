@@ -26,7 +26,7 @@ try:
 
     flag = False
     #テキストを一行ずつ処理
-    texts = moji.split("\r\n")
+    texts = moji.split()
     for text in texts:
         if text == '':
             flag = True

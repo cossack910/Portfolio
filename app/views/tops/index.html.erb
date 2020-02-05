@@ -4,8 +4,7 @@
             <div class="jumbotron jumbotron-fluid col-10 mb-0">
                 <div class="container-fluid" >
                     <h3 class="text-white font-weight-bolder ml-5">やぁ!</h3> 
-                    <p class="lead text-white ml-5">モノの良し悪しは表裏一体そんな観点からあなたのガジェットをレビューしてみませんか？</p>
-                    <button type="button" class="btn btn-warning text-danger ml-5 font-weight-bolder" data-toggle="modal" data-target="#TIPSModal">投稿方法!!</button>                  
+                    <p class="lead text-white ml-5">モノの良し悪しは表裏一体そんな観点からあなたのガジェットをレビューしてみませんか？</p>                 
                 </div>   
             </div><!-- /.jumbotron--> 
         <div class="col-1"></div>
@@ -74,7 +73,8 @@
                                        </div>  
                                     <div class="col-8">  
                                         <h5><%= disp.gadget_name %></h5>
-                                        <div id="infomation"><p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
+                                        <div id="infomation">
+                                        <p class="card-text">製品情報：<%= disp.gadget_info %></p></div>
                                     </div>
                                     <%= link_to "レビューを見る", reviews_path(id: disp.id) ,class: "btn btn-primary ml-auto mr-3"%>
                                 </div>
@@ -205,27 +205,6 @@
         <div class="col-7"><br></div>
         <div class="col-7"></div>
     </div> 
-
-        <!--モーダル-->
-        <div class="modal" id="TIPSModal" tabindex="-1" role="dialog" aria-labelledby="TIPSModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-              <h5>TIPS</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times</span>
-                </button>
-              </div><!--モーダルヘッダー-->
-              <div class="modal-body">
-                投稿方法と評価方法
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
-              </div>
-            </div><!--モーダルコンテンツ-->
-          </div><!--モーダルダイアログ本体-->
-        </div><!--モーダル外枠-->
-      <!--モーダル-->
 </div>
  
 

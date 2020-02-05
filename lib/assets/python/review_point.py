@@ -23,7 +23,7 @@ try:
 
     flag = False
     #テキストを一行ずつ処理
-    texts = moji.split("\r\n")
+    texts = moji.split()
     for text in texts:
         if text == '':
             flag = True
@@ -39,14 +39,14 @@ try:
             self.pn_scores = pn_scores # 感情極性値(後述)
 
     # CorpusElementのリスト
-    naive_corpus = []
+    corpus = []
 
-    naive_tokenizer = Tokenizer()
+    tokenizer = Tokenizer()
 
     for text in texts:
-        tokens = naive_tokenizer.tokenize(text)
+        tokens = tokenizer.tokenize(text)
         element = CorpusElement(text, tokens)
-        naive_corpus.append(element)
+        corpus.append(element)
         
     def load_pn_dict():
         dic = {}
@@ -73,12 +73,12 @@ try:
     pn_dic = load_pn_dict()
 
     # 各文章の極性値リストを得る
-    for element in naive_corpus:
+    for element in corpus:
         element.pn_scores = get_pn_scores(element.tokens, pn_dic)
 
     sum_average = 0
     num = 0
-    for element in sorted(naive_corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
+    for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
         sum_average += sum(element.pn_scores)/len(element.pn_scores)
         num += 1
 

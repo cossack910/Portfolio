@@ -5,11 +5,11 @@
         <div class="col-4">
             <div class="bg-white p-3">
                 <h5 class="">ユーザー名：<span class="ml-2"><%= current_user.user_name %></span></h5>
-                <h6>今までに貰った役に立った数:
+                <h5>貰った役に立った数:
                     <% @good_sum.each do |disp|%>
                         <%= disp.num_emp %>
                     <% end %>
-                </h6>
+                </h5>
                 <div class="bg-light mt-3 mb-4">
                 <% if current_user.user_image.blank? %>
                     <img src="guest.png" class="img-responsive mx-auto d-block img-thumbnail">

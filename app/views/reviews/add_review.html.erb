@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid bg-white">
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
@@ -12,16 +12,16 @@
         <div class="col-2"></div>
         <div class="col-8">
             <%= form_for @review, url: reviews_create_path(id: @gadget_id) do |f| %>
-                <label>良かった点をレビュー</label>
-                <div class="form-group"><%= f.text_area :good_review, size: "1000x5",class: "form-control" %></div>
-                <label>悪かった点をレビュー</label>
-                <div class="form-group"><%= f.text_area :bad_review, size: "1000x5",class: "form-control" %></div>                
+                <div class="row">
+                    <label class="text-danger font-weight-bolder col-6">良かった点</label>
+                    <label class="text-primary font-weight-bolder col-6">悪かった点</label>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6"><%= f.text_area :good_review, size: "1000x15",class: "form-control" %></div> 
+                    <div class="form-group col-6"><%= f.text_area :bad_review, size: "1000x15",class: "form-control" %></div>                
+                </div>      
                 <div class="form-group row">              
-                    <label class="btn btn-danger d-block mx-auto">画像をアップロード
-                        <span class="">
-                            <%= f.file_field :image, style: "", class: "form-control-file" %>
-                        </span>
-                    </label>
+                            <%= f.file_field :image, style: "", class: "form-control-file ml-3" %>
                 </div>   
                 <%= f.hidden_field :gadget_id, :value => @gadget_id %>
                 <%= f.hidden_field :user_id, :value => current_user.id %> 
