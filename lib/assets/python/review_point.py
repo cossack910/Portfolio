@@ -19,11 +19,11 @@ try:
     txt = []
     for row in rows:
         txt += list(row)
-    moji = ''.join(txt)
+    document = ''.join(txt)
 
     flag = False
     #テキストを一行ずつ処理
-    texts = moji.split()
+    texts = document.split()
     for text in texts:
         if text == '':
             flag = True
