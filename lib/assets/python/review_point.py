@@ -24,7 +24,6 @@ try:
     flag = False
     
     texts = document.split()
-    texts = document.split()
     texts = document.split("・")
     texts = document.split("【")
     texts = document.split("】")

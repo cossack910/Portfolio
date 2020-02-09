@@ -25,8 +25,13 @@ try:
     moji = ''.join(txt)
 
     flag = False
-    #テキストを一行ずつ処理
-    texts = moji.split()
+    
+    texts = document.split()
+    texts = document.split("・")
+    texts = document.split("【")
+    texts = document.split("】")
+    texts = document.split("。")
+    texts = document.split("\n\r")
     for text in texts:
         if text == '':
             flag = True
