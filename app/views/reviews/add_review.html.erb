@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-            <br><br>
+            <br><br><br><br>
             <h5 class="text-center font-weight-bolder">レビュー内容をお書きください。</h5>
-            <br><br>
+            <br><br><br><br>
         </div> 
         <div class="col-1"></div>   
     </div>
@@ -18,8 +18,8 @@
                     <label class="text-primary font-weight-bolder col-6">悪かった点</label>
                 </div>
                 <div class="row">
-                    <div class="form-group col-6"><%= f.text_area :good_review, size: "1000x10",class: "form-control" %></div> 
-                    <div class="form-group col-6"><%= f.text_area :bad_review, size: "1000x10",class: "form-control" %></div>                
+                    <div class="form-group col-6"><%= f.text_area :good_review, size: "1000x20",class: "form-control" %></div> 
+                    <div class="form-group col-6"><%= f.text_area :bad_review, size: "1000x20",class: "form-control" %></div>                
                 </div>      
                 <div class="form-group row">              
                             <%= f.file_field :image, style: "", class: "form-control-file ml-3" %>
