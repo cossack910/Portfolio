@@ -28,8 +28,6 @@ try:
     
     texts = document.split()
     texts = document.split("・")
-    texts = document.split("【")
-    texts = document.split("】")
     texts = document.split("。")
     texts = document.split("\n\r")
     for text in texts:
