@@ -23,10 +23,13 @@ try:
 
     flag = False
     
+    texts = document.replace("【","")
+    texts = document.replace("】","")
+    texts = document.replace("・","")
+    texts = document.replace("　","")
+    texts = document.replace("\n","")
+    texts = document.replace("\r","")
     texts = document.split()
-    texts = document.split("・")
-    texts = document.split("。")
-    texts = document.split("\n\r")
     for text in texts:
         if text == '':
             flag = True
