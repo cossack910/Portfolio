@@ -1,6 +1,7 @@
 import MySQLdb
 from janome.tokenizer import Tokenizer
 import codecs
+import re
 
 try:
     # データベースへの接続とカーソルの生成
@@ -21,13 +22,7 @@ try:
         txt += list(row)
     document = ''.join(txt)
     
-    texts = document.replace("【","")
-    texts = document.replace("】","")
-    texts = document.replace("・","")
-    texts = document.replace("　","")
-    texts = document.replace("\n","")
-    texts = document.replace("\r","")
-    texts = document.split()
+    texts = document.split("\n\r")
 
     flag = False
     for text in texts:
@@ -50,7 +45,11 @@ try:
     tokenizer = Tokenizer()
 
     for text in texts:
-        tokens = tokenizer.tokenize(text)
+        sentence = text
+        sentence = re.sub(r'《.+?》', '',sentence)#ルビを削除
+        sentence = re.sub(r'【.+?】', '',sentence)#入力注を削除
+        sentence = re.sub(r'・', '',sentence)
+        tokens = tokenizer.tokenize(sentence)
         element = CorpusElement(text, tokens)
         corpus.append(element)
         
