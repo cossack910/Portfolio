@@ -1,6 +1,9 @@
 import MySQLdb
 from janome.tokenizer import Tokenizer
 import codecs
+import sys
+
+input = sys.argv[1]
 
 try:
     # データベースへの接続とカーソルの生成
@@ -11,15 +14,15 @@ try:
         db='review',
         charset='utf8')
     cursor = connection.cursor()
-
-    cursor.execute("SELECT good_review,bad_review FROM reviews WHERE id = (select max(id) from reviews)")
+    
+    cursor.execute("SELECT good_review,bad_review FROM reviews WHERE gadget_id = %s" % input)
     # fetchall()で全件取り出し
     rows = cursor.fetchall()
-    
+    #print(rows)
     txt = []
     for row in rows:
         txt += list(row)
-    document = ''.join(txt)
+    moji = ''.join(txt)
     
     texts = document.replace("【","")
     texts = document.replace("】","")
@@ -45,14 +48,14 @@ try:
             self.pn_scores = pn_scores # 感情極性値(後述)
 
     # CorpusElementのリスト
-    corpus = []
+    naive_corpus = []
 
-    tokenizer = Tokenizer()
+    naive_tokenizer = Tokenizer()
 
     for text in texts:
-        tokens = tokenizer.tokenize(text)
+        tokens = naive_tokenizer.tokenize(text)
         element = CorpusElement(text, tokens)
-        corpus.append(element)
+        naive_corpus.append(element)
         
     def load_pn_dict():
         dic = {}
@@ -79,20 +82,21 @@ try:
     pn_dic = load_pn_dict()
 
     # 各文章の極性値リストを得る
-    for element in corpus:
+    for element in naive_corpus:
         element.pn_scores = get_pn_scores(element.tokens, pn_dic)
 
     sum_average = 0
     num = 0
-    for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
+    print("平均値が最も高い順に表示")
+    for element in sorted(naive_corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
         sum_average += sum(element.pn_scores)/len(element.pn_scores)
         num += 1
 
     # SQLクエリ実行（データ更新）
     f_num = 5 * (1 + sum_average/num)
     if f_num > 5:
-        f_num = 5 
-    print(f_num)
+        f_num = 5
+    cursor.execute('UPDATE gadgets SET review_point = %f WHERE id = %s' % (f_num, input))
         
     # 保存を実行
     connection.commit()
@@ -100,7 +104,7 @@ try:
     # 接続を閉じる
     connection.close()
 except MySQLdb.Error as ex:
-    print('0')
+    print('MySQL Error: ', ex)
 
 
 
