@@ -19,8 +19,8 @@ class ReviewsController < ApplicationController
             @review_point = Review.order(updated_at: :desc).limit(1)
             p_point = `python lib/assets/python/review_point.py`
             @review_point.update(review_point: p_point)
-            g_point = `python lib/assets/python/gadget_point.py "#{gadget_id}"`
-            `python lib/assets/python/gadget_model.py "#{gadget_id}"`
+            `python lib/assets/python/gadget_point.py "#{gadget_id}"`
+            #`python lib/assets/python/gadget_model.py "#{gadget_id}"`
         end
         redirect_to reviews_path(id: gadget_id)
     end

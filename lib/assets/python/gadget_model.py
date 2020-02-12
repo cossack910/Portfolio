@@ -61,7 +61,6 @@ for line in lines:
                 r.append(w)
         rl = (" ".join(r)).strip()
         results.append(rl)
-        print(rl) # ----画面に分かち書きした行を表示
 
 # 書き込み先テキストを開く
 wakati_file = 'lib/assets/python/model/' + input + '.wakati'

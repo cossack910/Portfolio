@@ -2,6 +2,7 @@ import MySQLdb
 from janome.tokenizer import Tokenizer
 import codecs
 import re
+import sys
 
 try:
     # データベースへの接続とカーソルの生成
@@ -64,7 +65,7 @@ try:
                 dic[columns[0]] = float(columns[3])      
         return dic
 
-    # トークンリストから極性値リストを得る
+    # 極性値リストを得る
     def get_pn_scores(tokens, pn_dic):
         scores = []
         
@@ -92,12 +93,13 @@ try:
     if f_num > 5:
         f_num = 5 
     print(f_num)
-        
+    
     # 保存を実行
     connection.commit()
 
     # 接続を閉じる
     connection.close()
+
 except MySQLdb.Error as ex:
     print('0')
 
