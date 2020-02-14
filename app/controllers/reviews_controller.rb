@@ -26,6 +26,15 @@ class ReviewsController < ApplicationController
         redirect_to reviews_path(id: gadget_id)
     end
 
+    def detail
+        gadget_id = params[:id]
+        #`python lib/assets/python/gadget_model.py "#{gadget_id}"`
+        info = "デザイン"
+        test = `python lib/assets/python/gen_read.py`
+        @test = test
+    end
+
+
     private
     def review_add_params
         params.require(:review).permit(:good_review, :bad_review, :user_id, :gadget_id, :image, :delete_flag)

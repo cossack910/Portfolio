@@ -30,6 +30,8 @@
                     <%= link_to "レビューする", login_path ,class: "btn btn-primary d-block mx-auto"%>
                 <% end %>
                 <br>
+                    <%= link_to "詳細を見る", reviews_detail_path(id: @gadget.id) ,class: "btn btn-danger d-block mx-auto"%>
+                <br>                
             </div>    
         </div>    
         </div>

@@ -26,7 +26,7 @@ for row in rows:
     txt += list(row)
 document = ''.join(txt)
 
-texts = document.split()
+texts = document.split("\r\n")
 
 flag = False
 for text in texts:
@@ -36,7 +36,7 @@ for text in texts:
 
 if flag == True:
     texts.remove('') 
-print(texts)
+#print(texts)
 
 #形態素解析
 t = Tokenizer()
@@ -45,7 +45,7 @@ results = []
 lines = texts
 for line in lines:
     s = line
-    s = re.sub(r'《.+?》', '',s)#ルビを削除
+    s = re.sub(r' ', '',s)
     s = re.sub(r'[# .+?]', '',s)#入力注を削除
     tokens = t.tokenize(s)#形態素解析
     #必要な語句だけを対象とする
