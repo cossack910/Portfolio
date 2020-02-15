@@ -1,1 +1,49 @@
-<%= @test %>
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-10">
+        </div>
+        <br><br>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-4">
+        <div class=" pt-3 bg-white">
+        <h4 class="text-center"><%= @gadget.gadget_name %></h4>
+            <div class="mb-5">
+                <img border="1" src="<%= @gadget.image %>" height="250rem" alt="ガジェット画像" class= "d-block ml-auto mr-auto">
+                <% if @gadget.review_point != nil %>
+                <div class="text-center h5 mt-3">
+                    総合評価点：<%= @gadget.review_point.round(2) %>/5.00<br>
+                    <span class="rate rate<%= (@gadget.review_point.round(1) * 10).floor %>"></span>  
+                </div>   
+                <% end %>               
+                <p class="pt-4 pr-4 pl-4 card-text">製品情報:<br><%= @gadget.gadget_info %></p>
+                <% if @gadget.gadget_url.empty? %>
+                    <p class="pr-4 pl-4 card-text text-center">製品ページがありません。</p>
+                <% else %>
+                    <p class="pr-4 pl-4 card-text text-center"><%= link_to '製品ページへ行く', @gadget.gadget_url %></p>
+                <% end %>
+                <% if logged_in? %>
+                    <%= link_to "レビューする", reviews_add_review_path(id: @gadget.id) ,class: "btn btn-primary d-block mx-auto"%>
+                <% else %>
+                    <%= link_to "レビューする", login_path ,class: "btn btn-primary d-block mx-auto"%>
+                <% end %>
+                <br>
+                    <%= link_to "レビューを見る", reviews_path(id: @gadget.id) ,class: "btn btn-danger d-block mx-auto"%>
+                <br>                
+            </div>    
+        </div>    
+        </div>
+        
+        <div class="col-6 pr-0 bg-white">
+        <% @data.each do |disp| %>
+        <%= disp %>
+        <% end %>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+    
+    </div>
+</div>

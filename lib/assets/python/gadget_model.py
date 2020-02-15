@@ -57,7 +57,8 @@ for line in lines:
             w = tok.base_form
             ps = tok.part_of_speech#品詞情報
             hinsi = ps.split(',')[0]
-            if hinsi in ['名詞', '形容詞', '動詞']:
+            #if hinsi in ['名詞', '形容詞', '動詞']:
+            if hinsi in ['名詞','形容詞', '動詞']:
                 r.append(w)
         rl = (" ".join(r)).strip()
         results.append(rl)

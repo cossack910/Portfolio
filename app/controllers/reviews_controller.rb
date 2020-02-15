@@ -28,10 +28,11 @@ class ReviewsController < ApplicationController
 
     def detail
         gadget_id = params[:id]
-        #`python lib/assets/python/gadget_model.py "#{gadget_id}"`
-        info = "デザイン"
-        test = `python lib/assets/python/gen_read.py`
-        @test = test
+        data = `python lib/assets/python/bayes_read.py "#{gadget_id}"`
+        data = data.split(",")
+        @data = data
+        @gadget = Gadget.find(gadget_id)
+
     end
 
 
