@@ -15,7 +15,8 @@ connection = MySQLdb.connect(
 cursor = connection.cursor()
 
 #良い点のみ
-cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
+#cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
+cursor.execute("SELECT good_review FROM reviews WHERE id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
 
@@ -44,7 +45,8 @@ for text in texts:
     bf.fit(text,"良い")
 
 #悪い点のみ
-cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
+#cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
+cursor.execute("SELECT bad_review FROM reviews WHERE id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
 
@@ -59,15 +61,19 @@ cost = "コストパフォーマンス"
 feel = "使用感"
 
 #予測
-pre, p_scorelist = bf.predict(performance)
-pre, d_scorelist = bf.predict(design)
-pre, c_scorelist = bf.predict(cost)
-pre, f_scorelist = bf.predict(feel)
+p_pre, p_scorelist = bf.predict(performance)
+d_pre, d_scorelist = bf.predict(design)
+c_pre, c_scorelist = bf.predict(cost)
+f_pre, f_scorelist = bf.predict(feel)
 
-print(performance,",", pre,",",p_scorelist[0][1],",",p_scorelist[1][1],
-        design,",", pre,",",d_scorelist[0][1],",",d_scorelist[1][1],
-        cost,",", pre,",",c_scorelist[0][1],",",c_scorelist[1][1],
-        feel,",", pre,",",f_scorelist[0][1],",",f_scorelist[1][1])
+# print(performance,",", p_pre,",",p_scorelist[0][1],",",p_scorelist[1][1],
+#         design,",", d_pre,",",d_scorelist[0][1],",",d_scorelist[1][1],
+#         cost,",", c_pre,",",c_scorelist[0][1],",",c_scorelist[1][1],
+#         feel,",", f_pre,",",f_scorelist[0][1],",",f_scorelist[1][1])
+print(p_pre,(1.1 - p_scorelist[0][1]/(p_scorelist[0][1] + p_scorelist[1][1])),
+        d_pre,(1.1 - d_scorelist[0][1]/(d_scorelist[0][1] + d_scorelist[1][1])),
+        c_pre,(1.1 - c_scorelist[0][1]/(c_scorelist[0][1] + c_scorelist[1][1])),
+        f_pre,(1.1 - f_scorelist[0][1]/(f_scorelist[0][1] + f_scorelist[1][1])))
 
 # 接続を閉じる
 connection.close()

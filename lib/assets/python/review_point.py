@@ -16,35 +16,37 @@ try:
 
     cursor.execute("SELECT good_review,bad_review FROM reviews WHERE id = (select max(id) from reviews)")
     # fetchall()で全件取り出し
-    rows = cursor.fetchall()
+    g_rows = cursor.fetchall()
     
-    txt = []
-    for row in rows:
-        txt += list(row)
-    document = ''.join(txt)
-    
-    texts = document.split("\n\r")
-
-    flag = False
-    for text in texts:
-        if text == '':
-            flag = True
-
-    if flag == True:
-        texts.remove('')
-    #print(texts)
-
     class CorpusElement:
         def __init__(self, text='', tokens=[], pn_scores=[]):
             self.text = text # テキスト本文
             self.tokens = tokens # 構文木解析されたトークンのリスト
             self.pn_scores = pn_scores # 感情極性値(後述)
-
-    # CorpusElementのリスト
-    corpus = []
+    
+    g_corpus = []
+    b_corpus = []
 
     tokenizer = Tokenizer()
 
+    def read_review(rows):
+        txt = []
+        for row in rows:
+            txt += list(row)
+        document = ''.join(txt)
+        
+        texts = document.split("\n\r")
+
+        flag = False
+        for text in texts:
+            if text == '':
+                flag = True
+
+        if flag == True:
+            texts.remove('')
+        return texts
+
+    texts = read_review(g_rows)
     for text in texts:
         sentence = text
         sentence = re.sub(r'《.+?》', '',sentence)#ルビを削除
@@ -52,7 +54,8 @@ try:
         sentence = re.sub(r'・', '',sentence)
         tokens = tokenizer.tokenize(sentence)
         element = CorpusElement(text, tokens)
-        corpus.append(element)
+        g_corpus.append(element)
+        
         
     def load_pn_dict():
         dic = {}
@@ -75,25 +78,47 @@ try:
             
         return scores
 
-    # 感情極性対応表のロード
-    pn_dic = load_pn_dict()
+    def calc_review_point(corpus):
+        # 感情極性対応表のロード
+        pn_dic = load_pn_dict()
 
-    # 各文章の極性値リストを得る
-    for element in corpus:
-        element.pn_scores = get_pn_scores(element.tokens, pn_dic)
+        # 各文章の極性値リストを得る
+        for element in corpus:
+            element.pn_scores = get_pn_scores(element.tokens, pn_dic)
 
-    sum_average = 0
-    num = 0
-    for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
-        sum_average += sum(element.pn_scores)/len(element.pn_scores)
-        num += 1
+        sum_average = 0
+        num = 0
+        for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
+            sum_average += sum(element.pn_scores)/len(element.pn_scores)
+            num += 1
 
-    # SQLクエリ実行（データ更新）
-    f_num = 5 * (1 + sum_average/num)
-    if f_num > 5:
-        f_num = 5 
-    print(f_num)
-    
+        # SQLクエリ実行（データ更新）
+        f_num = sum_average/num
+        return f_num
+
+    g_point = calc_review_point(g_corpus)
+
+    cursor.execute("SELECT bad_review,bad_review FROM reviews WHERE id = (select max(id) from reviews)")
+    # fetchall()で全件取り出し
+    b_rows = cursor.fetchall()
+    texts = read_review(b_rows)
+    for text in texts:
+        sentence = text
+        sentence = re.sub(r'《.+?》', '',sentence)#ルビを削除
+        sentence = re.sub(r'【.+?】', '',sentence)#入力注を削除
+        sentence = re.sub(r'・', '',sentence)
+        tokens = tokenizer.tokenize(sentence)
+        element = CorpusElement(text, tokens)
+        b_corpus.append(element)
+
+    b_point = calc_review_point(b_corpus)
+    ans = 5 * (1.1 - (g_point/(g_point + b_point)))
+    if ans > 5 or ans < 0:
+        ans = 0
+    if b_point > 0 :
+        ans = 0     
+    print(ans)
+
     # 保存を実行
     connection.commit()
 
