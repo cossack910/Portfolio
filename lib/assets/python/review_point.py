@@ -14,7 +14,7 @@ try:
         charset='utf8')
     cursor = connection.cursor()
 
-    cursor.execute("SELECT good_review,bad_review FROM reviews WHERE id = (select max(id) from reviews)")
+    cursor.execute("SELECT good_review FROM reviews WHERE id = (select max(id) from reviews)")
     # fetchall()で全件取り出し
     g_rows = cursor.fetchall()
     
@@ -87,18 +87,13 @@ try:
             element.pn_scores = get_pn_scores(element.tokens, pn_dic)
 
         sum_average = 0
-        num = 0
         for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
             sum_average += sum(element.pn_scores)/len(element.pn_scores)
-            num += 1
-
-        # SQLクエリ実行（データ更新）
-        f_num = sum_average/num
-        return f_num
+        return sum_average
 
     g_point = calc_review_point(g_corpus)
 
-    cursor.execute("SELECT bad_review,bad_review FROM reviews WHERE id = (select max(id) from reviews)")
+    cursor.execute("SELECT bad_review FROM reviews WHERE id = (select max(id) from reviews)")
     # fetchall()で全件取り出し
     b_rows = cursor.fetchall()
     texts = read_review(b_rows)
@@ -112,11 +107,22 @@ try:
         b_corpus.append(element)
 
     b_point = calc_review_point(b_corpus)
-    ans = 5 * (1.1 - (g_point/(g_point + b_point)))
-    if ans > 5 or ans < 0:
+    
+    if b_point < -1:
+        b_point = -1
+
+    ans = 2.5 + ((3 * (1 + g_point)) - (3 * (1 + b_point)))
+    print(ans)
+    if  ans < 0:
         ans = 0
-    if b_point > 0 :
-        ans = 0     
+    if b_point > 0:
+        ans = 0
+    # if b_point > g_point:
+    #     ans = 0
+    # if b_point - g_point < 0.1:
+    #     ans = 3
+    if ans > 5:
+        ans = 4.8
     print(ans)
 
     # 保存を実行

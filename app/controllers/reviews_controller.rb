@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
             p_point = `python lib/assets/python/review_point.py`
             review_point.update(review_point: p_point)
 
-            avg = Review.where(gadget_id: gadget_id).average(:review_point)
+            avg = Review.where(gadget_id: gadget_id).where(delete_flag: 0).average(:review_point)
             Gadget.where(id: gadget_id).update(review_point: avg)
         end
         redirect_to reviews_path(id: gadget_id)

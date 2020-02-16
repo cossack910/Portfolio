@@ -16,7 +16,7 @@ cursor = connection.cursor()
 
 #良い点のみ
 #cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
-cursor.execute("SELECT good_review FROM reviews WHERE id = %s" % input)
+cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
 
@@ -44,9 +44,11 @@ bf = BayesianFilter()
 for text in texts:
     bf.fit(text,"良い")
 
+#print("\n\n\n")
+
 #悪い点のみ
 #cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
-cursor.execute("SELECT bad_review FROM reviews WHERE id = %s" % input)
+cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
 
@@ -59,6 +61,9 @@ performance = "性能"
 design = "デザイン"
 cost = "コストパフォーマンス"
 feel = "使用感"
+# a = "音質"
+# pre, scorelist = bf.predict(a)
+# print(pre, scorelist)
 
 #予測
 p_pre, p_scorelist = bf.predict(performance)
@@ -66,14 +71,27 @@ d_pre, d_scorelist = bf.predict(design)
 c_pre, c_scorelist = bf.predict(cost)
 f_pre, f_scorelist = bf.predict(feel)
 
-# print(performance,",", p_pre,",",p_scorelist[0][1],",",p_scorelist[1][1],
-#         design,",", d_pre,",",d_scorelist[0][1],",",d_scorelist[1][1],
-#         cost,",", c_pre,",",c_scorelist[0][1],",",c_scorelist[1][1],
-#         feel,",", f_pre,",",f_scorelist[0][1],",",f_scorelist[1][1])
-print(p_pre,(1.1 - p_scorelist[0][1]/(p_scorelist[0][1] + p_scorelist[1][1])),
-        d_pre,(1.1 - d_scorelist[0][1]/(d_scorelist[0][1] + d_scorelist[1][1])),
-        c_pre,(1.1 - c_scorelist[0][1]/(c_scorelist[0][1] + c_scorelist[1][1])),
-        f_pre,(1.1 - f_scorelist[0][1]/(f_scorelist[0][1] + f_scorelist[1][1])))
+p_score = 3 * (1 + p_scorelist[0][1] - p_scorelist[1][1])
+d_score = 3 * (1 + d_scorelist[0][1] - d_scorelist[1][1])
+c_score = 3 * (1 + c_scorelist[0][1] - c_scorelist[1][1])
+f_score = 3 * (1 + f_scorelist[0][1] - f_scorelist[1][1])
+if p_score > 5:
+    p_score = 5
+if d_score > 5:
+    d_score = 5
+if c_score > 5:
+    c_score = 5
+if f_score > 5:
+    f_score = 5
+print(p_pre, p_score,"\n",
+        d_pre, d_score,"\n",
+        c_pre, c_score,"\n",
+        f_pre, f_score)
+
+# print(p_pre,(p_scorelist[0][1]/(p_scorelist[0][1] + p_scorelist[1][1])),
+#         d_pre,(d_scorelist[0][1]/(d_scorelist[0][1] + d_scorelist[1][1])),
+#         c_pre,(c_scorelist[0][1]/(c_scorelist[0][1] + c_scorelist[1][1])),
+#         f_pre,(f_scorelist[0][1]/(f_scorelist[0][1] + f_scorelist[1][1])))
 
 # 接続を閉じる
 connection.close()

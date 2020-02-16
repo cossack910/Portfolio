@@ -63,7 +63,7 @@
                                     </div>
                                 </div>    
                                 <div class="row">
-                                    <% if disp.review_point != nil %>
+                                    <% if disp.review_point != nil && disp.review_point != 0 %>
                                         <div class="col text-right">
                                         評価点：<%= disp.review_point.round(2) %>/5.00<br>
                                         <span class="rate rate<%= (disp.review_point.round(1) * 10).floor %>"></span>
