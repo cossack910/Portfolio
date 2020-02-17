@@ -86,10 +86,11 @@ try:
         for element in corpus:
             element.pn_scores = get_pn_scores(element.tokens, pn_dic)
 
-        sum_average = 0
+        sum_point = 0
         for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
-            sum_average += sum(element.pn_scores)/len(element.pn_scores)
-        return sum_average
+            sum_point += sum(element.pn_scores)/len(element.pn_scores)
+            print(sum_point)
+        return sum_point
 
     g_point = calc_review_point(g_corpus)
 
@@ -111,16 +112,13 @@ try:
     if b_point < -1:
         b_point = -1
 
-    ans = 2.5 + ((3 * (1 + g_point)) - (3 * (1 + b_point)))
-    print(ans)
+    ans = 3 + ((3 * (1 + g_point)) - abs(3 * (1 - (1 - b_point))))
     if  ans < 0:
         ans = 0
     if b_point > 0:
         ans = 0
-    # if b_point > g_point:
-    #     ans = 0
-    # if b_point - g_point < 0.1:
-    #     ans = 3
+    if b_point - g_point > 0.1:
+        ans = 0
     if ans > 5:
         ans = 4.8
     print(ans)

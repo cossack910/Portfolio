@@ -71,10 +71,11 @@ d_pre, d_scorelist = bf.predict(design)
 c_pre, c_scorelist = bf.predict(cost)
 f_pre, f_scorelist = bf.predict(feel)
 
-p_score = 3 * (1 + p_scorelist[0][1] - p_scorelist[1][1])
-d_score = 3 * (1 + d_scorelist[0][1] - d_scorelist[1][1])
-c_score = 3 * (1 + c_scorelist[0][1] - c_scorelist[1][1])
-f_score = 3 * (1 + f_scorelist[0][1] - f_scorelist[1][1])
+p_score = 3 * (1 + (p_scorelist[0][1] - p_scorelist[1][1]))
+d_score = 3 * (1 + (d_scorelist[0][1] - d_scorelist[1][1]))
+c_score = 3 * (1 + (c_scorelist[0][1] - c_scorelist[1][1]))
+f_score = 3 * (1 + (f_scorelist[0][1] - f_scorelist[1][1]))
+print(p_scorelist  , d_scorelist , c_scorelist , f_scorelist)
 if p_score > 5:
     p_score = 5
 if d_score > 5:
