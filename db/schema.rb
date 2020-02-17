@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_131419) do
+ActiveRecord::Schema.define(version: 2020_02_17_051342) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "category_name"
@@ -35,6 +35,10 @@ ActiveRecord::Schema.define(version: 2020_01_19_131419) do
     t.integer "category_id"
     t.date "release_date"
     t.float "review_point", limit: 53
+    t.float "performance_point", limit: 53
+    t.float "design_point", limit: 53
+    t.float "costperformance_point", limit: 53
+    t.float "feel_point", limit: 53
   end
 
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

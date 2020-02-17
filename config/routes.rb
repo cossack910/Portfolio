@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   #empathies
   post 'empathies/create', to: 'empathies#create'
   delete 'empathies/delete', to: 'empathies#delete'
+  #Performance_search
+  post 'performance_search/search', to: 'performance_search#search'
 
   #login
   get 'login', to: 'login#index'

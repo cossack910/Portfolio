@@ -71,28 +71,32 @@ d_pre, d_scorelist = bf.predict(design)
 c_pre, c_scorelist = bf.predict(cost)
 f_pre, f_scorelist = bf.predict(feel)
 
-p_score = 3 * (1 + (p_scorelist[0][1] - p_scorelist[1][1]))
-d_score = 3 * (1 + (d_scorelist[0][1] - d_scorelist[1][1]))
-c_score = 3 * (1 + (c_scorelist[0][1] - c_scorelist[1][1]))
-f_score = 3 * (1 + (f_scorelist[0][1] - f_scorelist[1][1]))
-print(p_scorelist  , d_scorelist , c_scorelist , f_scorelist)
+p_score = 3 + (p_scorelist[0][1] - p_scorelist[1][1])
+d_score = 3 + (d_scorelist[0][1] - d_scorelist[1][1])
+c_score = 3 + (c_scorelist[0][1] - c_scorelist[1][1])
+f_score = 3 + (f_scorelist[0][1] - f_scorelist[1][1])
 if p_score > 5:
-    p_score = 5
+    p_score = 5.00
 if d_score > 5:
-    d_score = 5
+    d_score = 5.00
 if c_score > 5:
-    c_score = 5
+    c_score = 5.00
 if f_score > 5:
-    f_score = 5
-print(p_pre, p_score,"\n",
-        d_pre, d_score,"\n",
-        c_pre, c_score,"\n",
-        f_pre, f_score)
+    f_score = 5.00
 
-# print(p_pre,(p_scorelist[0][1]/(p_scorelist[0][1] + p_scorelist[1][1])),
-#         d_pre,(d_scorelist[0][1]/(d_scorelist[0][1] + d_scorelist[1][1])),
-#         c_pre,(c_scorelist[0][1]/(c_scorelist[0][1] + c_scorelist[1][1])),
-#         f_pre,(f_scorelist[0][1]/(f_scorelist[0][1] + f_scorelist[1][1])))
+if p_score < 0:
+    p_score = 0.00
+if d_score < 0:
+    d_score = 0.00
+if c_score < 0:
+    c_score = 0.00
+if f_score < 0:
+    f_score = 0.00 
+
+print(round(p_score,2))
+print(round(d_score,2))
+print(round(c_score,2))
+print(round(f_score,2))
 
 # 接続を閉じる
 connection.close()

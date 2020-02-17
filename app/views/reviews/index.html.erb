@@ -12,12 +12,11 @@
         <h4 class="text-center"><%= @gadget.gadget_name %></h4>
             <div class="mb-5">
                 <img border="1" src="<%= @gadget.image %>" height="250rem" alt="ガジェット画像" class= "d-block ml-auto mr-auto">
-                <% if @gadget.review_point != nil %>
                 <div class="text-center h5 mt-3">
-                    総合評価点：<%= @gadget.review_point.round(2) %>/5.00<br>
-                    <span class="rate rate<%= (@gadget.review_point.round(1) * 10).floor %>"></span>  
-                </div>   
-                <% end %>               
+                    <% point = (@gadget.review_point.round(2) + @gadget.performance_point.round(2) + @gadget.design_point.round(2) + @gadget.costperformance_point.round(2) + @gadget.feel_point.round(2))/5%>
+                    総合評価点：<%= point.round(2) %>/5.00<br>
+                    <span class="rate rate<%= (point.round(1) * 10).floor %>"></span>
+                </div>
                 <p class="pt-4 pr-4 pl-4 card-text">製品情報:<br><%= @gadget.gadget_info %></p>
                 <% if @gadget.gadget_url.empty? %>
                     <p class="pr-4 pl-4 card-text text-center">製品ページがありません。</p>
@@ -30,7 +29,35 @@
                     <%= link_to "レビューする", login_path ,class: "btn btn-primary d-block mx-auto"%>
                 <% end %>
                 <br>
-                    <%= link_to "詳細を見る", reviews_detail_path(id: @gadget.id) ,class: "btn btn-danger d-block mx-auto"%>
+                <div>
+                <table border="1" class = "ml-auto mr-auto">
+                    <tr>
+                    <td>総合評価点：</td>
+                    <td><span class="rate rate<%= (point.round(1) * 10).floor %>"></span></td>
+                    <td><%= point.round(2) %>/5.00</td>
+                    </tr>
+                    <tr>
+                    <td>性能：</td>
+                    <td><span class="rate rate<%= (@gadget.performance_point.round(1) * 10).floor %>"></span></td>
+                    <td><%= @gadget.performance_point.round(2) %>/5.00</td>
+                    </tr>
+                    <tr>
+                    <td>デザイン：</td>
+                    <td><span class="rate rate<%= (@gadget.design_point.round(1) * 10).floor %>"></span></td> 
+                    <td><%= @gadget.design_point.round(2) %>/5.00</td>
+                    </tr>
+                    <tr>
+                    <td>コスパ：</td>
+                    <td><span class="rate rate<%= (@gadget.costperformance_point.round(1) * 10).floor %>"></span></td>
+                    <td><%= @gadget.costperformance_point.round(2) %>/5.00</td>
+                    </tr>
+                    <tr>
+                    <td>使用感：</td>
+                    <td><span class="rate rate<%= (@gadget.feel_point.round(1) * 10).floor %>"></span></td>
+                    <td><%= @gadget.feel_point.round(2) %>/5.00</td>
+                    </tr> 
+                </table> 
+                </div>            
                 <br>                
             </div>    
         </div>    

@@ -49,8 +49,7 @@ try:
     texts = read_review(g_rows)
     for text in texts:
         sentence = text
-        sentence = re.sub(r'《.+?》', '',sentence)#ルビを削除
-        sentence = re.sub(r'【.+?】', '',sentence)#入力注を削除
+        sentence = re.sub(r'【+?】', '',sentence)
         sentence = re.sub(r'・', '',sentence)
         tokens = tokenizer.tokenize(sentence)
         element = CorpusElement(text, tokens)
@@ -89,7 +88,7 @@ try:
         sum_point = 0
         for element in sorted(corpus, key=lambda e: sum(e.pn_scores)/len(e.pn_scores), reverse=True):
             sum_point += sum(element.pn_scores)/len(element.pn_scores)
-            print(sum_point)
+            #print(sum_point)
         return sum_point
 
     g_point = calc_review_point(g_corpus)
@@ -113,7 +112,7 @@ try:
         b_point = -1
 
     ans = 3 + ((3 * (1 + g_point)) - abs(3 * (1 - (1 - b_point))))
-    if  ans < 0:
+    if ans < 0:
         ans = 0
     if b_point > 0:
         ans = 0

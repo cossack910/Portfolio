@@ -21,20 +21,12 @@ class ReviewsController < ApplicationController
             review_point.update(review_point: p_point)
 
             avg = Review.where(gadget_id: gadget_id).where(delete_flag: 0).average(:review_point)
-            Gadget.where(id: gadget_id).update(review_point: avg)
+            data = `python lib/assets/python/bayes_read.py "#{gadget_id}"`
+            data = data.split(" ")
+            Gadget.where(id: gadget_id).update(review_point: avg, performance_point: data[0], design_point: data[1], costperformance_point: data[2], feel_point: data[3])
         end
         redirect_to reviews_path(id: gadget_id)
     end
-
-    def detail
-        gadget_id = params[:id]
-        data = `python lib/assets/python/bayes_read.py "#{gadget_id}"`
-        data = data.split(",")
-        @data = data
-        @gadget = Gadget.find(gadget_id)
-
-    end
-
 
     private
     def review_add_params
