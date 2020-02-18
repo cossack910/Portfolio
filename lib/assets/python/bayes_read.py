@@ -44,8 +44,6 @@ bf = BayesianFilter()
 for text in texts:
     bf.fit(text,"良い")
 
-#print("\n\n\n")
-
 #悪い点のみ
 #cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
 cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
@@ -75,6 +73,7 @@ p_score = 3 + (p_scorelist[0][1] - p_scorelist[1][1])
 d_score = 3 + (d_scorelist[0][1] - d_scorelist[1][1])
 c_score = 3 + (c_scorelist[0][1] - c_scorelist[1][1])
 f_score = 3 + (f_scorelist[0][1] - f_scorelist[1][1])
+
 if p_score > 5:
     p_score = 5.00
 if d_score > 5:

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   patch 'profiles/update', to: 'profiles#update'
   get 'profiles/pass', to: 'profiles#pass'
   put 'profiles/pass_update', to: 'profiles#pass_update'
+  get 'profiles/display_profile', to: 'profiles#display_profile'
   #delere_reviews
   put 'delete_reviews/update', to: 'delete_reviews#update'
 
