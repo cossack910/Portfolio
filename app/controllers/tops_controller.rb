@@ -18,7 +18,6 @@ class TopsController < ApplicationController
             @title = "カテゴリ： 新着ガジェット"
         elsif params[:gadgets] == "new_reviews" then
             @gadget = Gadget.joins("INNER JOIN reviews ON gadgets.id = reviews.gadget_id").select("gadgets.*, reviews.id AS reviews_id").order(reviews_id: "DESC").page(params[:page])
-            #@gadget = gadget.select(:id).distinct(true)
             @title = "カテゴリ： 新着レビュー"
         elsif params[:gadgets] == "new_release_date" then
             @gadget = Gadget.all.order(release_date: "DESC").page(params[:page]).per(5)

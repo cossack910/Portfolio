@@ -15,7 +15,6 @@ connection = MySQLdb.connect(
 cursor = connection.cursor()
 
 #良い点のみ
-#cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
 cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
@@ -45,7 +44,6 @@ for text in texts:
     bf.fit(text,"良い")
 
 #悪い点のみ
-#cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
 cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
@@ -59,9 +57,6 @@ performance = "性能"
 design = "デザイン"
 cost = "コストパフォーマンス"
 feel = "使用感"
-# a = "音質"
-# pre, scorelist = bf.predict(a)
-# print(pre, scorelist)
 
 #予測
 p_pre, p_scorelist = bf.predict(performance)

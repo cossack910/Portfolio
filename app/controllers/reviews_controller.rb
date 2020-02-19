@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-    
+require 'bigdecimal'
     def index
         key = params[:id]
         @gadget = Gadget.find(key)
@@ -20,10 +20,10 @@ class ReviewsController < ApplicationController
             p_point = `python lib/assets/python/review_point.py`
             review_point.update(review_point: p_point)
 
-            avg = Review.where(gadget_id: gadget_id).where(delete_flag: 0).average(:review_point)
+            avg = Review.where(gadget_id: gadget_id).where(delete_flag: 0).where.not(review_point: 0).average(:review_point)
             data = `python lib/assets/python/bayes_read.py "#{gadget_id}"`
             data = data.split(" ")
-            rev_avg = (avg + data[0] + data[1] + data[2] + data[3])/5 
+            rev_avg = (BigDecimal(avg) + BigDecimal(data[0]) + BigDecimal(data[1]) + BigDecimal(data[2]) + BigDecimal(data[3]))/5
             Gadget.where(id: gadget_id).update(review_point: rev_avg, performance_point: data[0], design_point: data[1], costperformance_point: data[2], feel_point: data[3])
         end
         redirect_to reviews_path(id: gadget_id)
