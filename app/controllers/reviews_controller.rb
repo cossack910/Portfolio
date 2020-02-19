@@ -16,7 +16,7 @@ require 'bigdecimal'
         if request.post? then
             gadget_id = params[:id]
             Review.create(review_add_params)
-            review_point = Review.order(updated_at: :desc).limit(1)
+            review_point = Review.order(created_at: :desc).limit(1)
             p_point = `python lib/assets/python/review_point.py`
             review_point.update(review_point: p_point)
 

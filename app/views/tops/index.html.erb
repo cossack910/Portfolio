@@ -185,7 +185,7 @@
                     <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
                     <% @user_review_num.each.with_index(1) do |disp, i|%>
                     <div class="h5">第 <%= i %> 位<br>
-                    <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %><span class="ml-right"><span class ="text-right"><%= disp.num_user %>review</span></div><br>
+                    <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %><span class="ml-right"><span class ="text-right"><br><%= disp.num_user %>review</span></div><br>
                     <% end %>
                     <hr>
                     <h4 class="card-title font-weight-bolder">役に立った数ランキング</h4>

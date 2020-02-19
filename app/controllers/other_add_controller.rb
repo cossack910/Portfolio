@@ -7,6 +7,8 @@ class OtherAddController < ApplicationController
     def create
         @g = gadget_params
         Gadget.create(gadget_params)
+        gad = Gadget.order(created_at: :desc).limit(1)
+        gad.update(review_point: 0, performance_point: 0, design_point: 0, costperformance_point: 0, feel_point: 0)
         #redirect_to '/other_add' 
     end
 
@@ -21,7 +23,9 @@ class OtherAddController < ApplicationController
     end
 
     def test
-        
+        @review_del = Review.maximum(:id)
+        Review.find(@review_del).destroy
+        redirect_to '/other_add'
     end
 
     private

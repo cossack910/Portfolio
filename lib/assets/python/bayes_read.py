@@ -53,9 +53,9 @@ texts = read_review(rows)
 for text in texts:
     bf.fit(text,"悪い")
 
-performance = "性能"
-design = "デザイン"
-cost = "コストパフォーマンス"
+performance = "性能機能動スペック"
+design = "デザイン形見た目外見"
+cost = "コストパフォーマンスコスパ"
 feel = "使用感"
 
 #予測
