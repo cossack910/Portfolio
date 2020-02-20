@@ -168,13 +168,13 @@
                 <div class="card-body">
                     <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
                     <% @review_num.each.with_index(1) do |disp, i|%>
-                    <h5>第 <%= i %> 位<br>
+                    <h5>第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_gadget %>review<br>
                     <%= link_to disp.gadget_name, reviews_path(id: disp.id) %></h5>
                     <% end %>
                     <hr>
                     <h4 class="card-title font-weight-bolder">総合評価ランキング</h4>
                     <% @gadget_num.each.with_index(1) do |disp, i|%>
-                    <h5>第 <%= i %> 位<br>
+                    <h5>第 <%= i %> 位&nbsp;&nbsp;<%= disp.review_point.round(2) %>/5.0点<br>
                     <%= link_to disp.gadget_name, reviews_path(id: disp.id) %></h5>
                     <% end %>
                 </div>
@@ -184,14 +184,14 @@
                 <div class="card-body">
                     <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
                     <% @user_review_num.each.with_index(1) do |disp, i|%>
-                    <div class="h5">第 <%= i %> 位<br>
-                    <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %><span class="ml-right"><span class ="text-right"><br><%= disp.num_user %>review</span></div><br>
+                    <div class="h5">第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_user %>review<br>
+                    <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %></div><br>
                     <% end %>
                     <hr>
                     <h4 class="card-title font-weight-bolder">役に立った数ランキング</h4>
                     <% @user_good_num.each.with_index(1) do |disp, i|%>
-                    <h5>第 <%= i %> 位<br>
-                    <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %><span class="text-right"><span class=""><%= disp.num_emp %>いいね</h5>
+                    <div class="h5">第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_emp %>役に立ちました<br>
+                    <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %></div>
                     <% end %>
                 </div>    
             </div>

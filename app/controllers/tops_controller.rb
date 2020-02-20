@@ -6,7 +6,7 @@ class TopsController < ApplicationController
         @phones = Gadget.where(category_id: 1).order(id: "DESC").limit(5)
         @pc = Gadget.where(category_id: 2).order(id: "DESC").limit(5)
         @other = Gadget.where(category_id: 3).order(id: "DESC").limit(5)
-        @review_num = Review.joins("INNER JOIN gadgets ON gadgets.id = reviews.gadget_id").select("gadgets.gadget_name, gadgets.id,count(reviews.gadget_id) num_gadget").group('reviews.gadget_id').order('num_gadget desc').limit(5)    
+        @review_num = Review.joins("INNER JOIN gadgets ON gadgets.id = reviews.gadget_id").select("gadgets.gadget_name, gadgets.id, count(reviews.gadget_id) num_gadget").group('reviews.gadget_id').order('num_gadget desc').limit(5)    
         @gadget_num = Gadget.order(review_point: "DESC").limit(5) 
         @user_review_num = Review.joins("INNER JOIN gadgets ON gadgets.id = reviews.gadget_id").joins("INNER JOIN users ON users.id = reviews.user_id").select("users.id, users.user_name,count(users.id) num_user").group("users.id").order("num_user desc").limit(5) 
         @user_good_num = Review.joins("INNER JOIN empathies ON empathies.review_id = reviews.id").joins("INNER JOIN users ON users.id = reviews.user_id").select("users.id, users.user_name,count(empathies.review_id) num_emp").group("users.id").order("num_emp desc").limit(5) 
