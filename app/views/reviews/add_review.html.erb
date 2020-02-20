@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'review_check'%>
 <script type="text/javascript">
 $(function () {
   var count = 0;
@@ -38,8 +39,8 @@ $(function () {
                     <label class="text-primary font-weight-bolder col-6">悪かった点</label>
                 </div>
                 <div class="row">
-                    <div class="form-group col-6"><%= f.text_area :good_review, size: "1000x20",class: "form-control" %></div> 
-                    <div class="form-group col-6"><%= f.text_area :bad_review, size: "1000x20",class: "form-control" %></div>                
+                    <div class="form-group col-6"><%= f.text_area :good_review, size: "1000x20",class: "form-control",id: "good_review" %></div> 
+                    <div class="form-group col-6"><%= f.text_area :bad_review, size: "1000x20",class: "form-control", id: "bad_review" %></div>                
                 </div>      
                 <div class="form-group row">              
                     <%= f.file_field :image, style: "", class: "form-control-file ml-3" %>
@@ -47,7 +48,7 @@ $(function () {
                 <%= f.hidden_field :gadget_id, :value => @gadget_id %>
                 <%= f.hidden_field :user_id, :value => current_user.id %> 
                 <%= f.hidden_field :delete_flag, :value => 0 %>          
-                <%= submit_tag("送信", class: "btn btn-primary float-right mr-2",id: "start2")%>   
+                <%= submit_tag("送信", class: "btn btn-primary float-right mr-2",id: "start2",onClick: "return rev_check();")%>   
                 <input type="reset" value="リセット" class="btn btn-primary float-right mr-2"> 
             <% end %>             
         </div>
