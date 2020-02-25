@@ -14,11 +14,12 @@ connection = MySQLdb.connect(
     charset='utf8')
 cursor = connection.cursor()
 
-#良い点のみ
+#良い点のみ読み込む
 cursor.execute("SELECT good_review FROM reviews WHERE gadget_id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
 
+#ＤＢから読み込んだ文章を１行ごとに区切り、空白を排除する。
 def read_review(rows):
     txt = []
     for row in rows:
@@ -43,7 +44,7 @@ bf = BayesianFilter()
 for text in texts:
     bf.fit(text,"良い")
 
-#悪い点のみ
+#悪い点のみ読み込む
 cursor.execute("SELECT bad_review FROM reviews WHERE gadget_id = %s" % input)
 # fetchall()で全件取り出し
 rows = cursor.fetchall()
@@ -86,7 +87,7 @@ if c_score < 0:
     c_score = 0.00
 if f_score < 0:
     f_score = 0.00 
-
+#rails側に値を渡す。
 print(round(p_score,2))
 print(round(d_score,2))
 print(round(c_score,2))

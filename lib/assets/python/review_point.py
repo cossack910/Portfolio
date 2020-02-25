@@ -120,6 +120,7 @@ try:
         ans = 0
     if ans > 5:
         ans = 4.8
+    #rails側に値を渡す。
     print(ans)
 
     # 保存を実行

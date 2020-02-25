@@ -168,7 +168,7 @@
                 <div class="card-body">
                     <h4 class="card-title font-weight-bolder">レビュー数ランキング</h4>
                     <% @review_num.each.with_index(1) do |disp, i|%>
-                    <h5>第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_gadget %>review<br>
+                    <h5>第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_gadget %>review
                     <%= link_to disp.gadget_name, reviews_path(id: disp.id) %></h5>
                     <% end %>
                     <hr>
@@ -190,7 +190,7 @@
                     <hr>
                     <h4 class="card-title font-weight-bolder">役に立った数ランキング</h4>
                     <% @user_good_num.each.with_index(1) do |disp, i|%>
-                    <div class="h5">第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_emp %>役に立ちました<br>
+                    <div class="h5">第 <%= i %> 位&nbsp;&nbsp;<%= disp.num_emp %>役に立った<br>
                     <%= link_to disp.user_name, profiles_display_profile_path(id: disp.id) %></div>
                     <% end %>
                 </div>    

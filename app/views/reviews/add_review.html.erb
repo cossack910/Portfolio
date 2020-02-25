@@ -1,24 +1,4 @@
 <%= javascript_pack_tag 'review_check'%>
-<script type="text/javascript">
-$(function () {
-  var count = 0;
-  $(document).on('click','#start2',function(){ 
-     progress(count);
-  });
-  $(document).on('click','#back2',function(){ 
-    $("#pgss2").css({'width':'0%'});
-  });
- 
-  function progress(count){
-    setTimeout(function(){ 
-      $("#pgss2").css({'width':count+'%'});
-      count++;
-      if(count == 90) return;
-      progress(count);
-    },100);
-  }
-})
-</script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-1"></div>
@@ -54,8 +34,5 @@ $(function () {
         </div>
         <div class="col-2"></div>
     </div>   
-    <div class="progress">
-        <div class="progress-bar progress-bar-info" id="pgss2"></div>
-    </div>
 </div>
 
