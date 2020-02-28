@@ -38,6 +38,7 @@ def read_review(rows):
         texts.remove('') 
     return texts
 
+#スコア超過時に正常値内に整える
 def score(point):
     if point > 5:
       point = 5.00

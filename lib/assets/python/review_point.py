@@ -23,12 +23,12 @@ try:
             self.text = text # テキスト本文
             self.tokens = tokens # 構文木解析されたトークンのリスト
             self.pn_scores = pn_scores # 感情極性値(後述)
-    
+    #g_pointは良い点のレビューを格納する配列,b_pointは悪い点のレビューを格納する配列
     g_corpus = []
     b_corpus = []
 
     tokenizer = Tokenizer()
-
+    #タプルを配列に格納し、空白を削除する
     def read_review(rows):
         txt = []
         for row in rows:
@@ -45,17 +45,21 @@ try:
         if flag == True:
             texts.remove('')
         return texts
+    #読み込ん文章を整えて配列に格納する
+    def text_read(texts):
+        corpus = []
+        for text in texts:
+            sentence = text
+            sentence = re.sub(r'【+?】', '',sentence)
+            sentence = re.sub(r'・', '',sentence)
+            tokens = tokenizer.tokenize(sentence)
+            element = CorpusElement(text, tokens)
+            corpus.append(element)
+        return corpus
 
     texts = read_review(g_rows)
-    for text in texts:
-        sentence = text
-        sentence = re.sub(r'【+?】', '',sentence)
-        sentence = re.sub(r'・', '',sentence)
-        tokens = tokenizer.tokenize(sentence)
-        element = CorpusElement(text, tokens)
-        g_corpus.append(element)
-        
-        
+    g_corpus = text_read(texts)   
+
     def load_pn_dict():
         dic = {}
         
@@ -76,7 +80,7 @@ try:
                 scores.append(pn_dic[surface])
             
         return scores
-
+    #極性値計算
     def calc_review_point(corpus):
         # 感情極性対応表のロード
         pn_dic = load_pn_dict()
@@ -97,15 +101,7 @@ try:
     # fetchall()で全件取り出し
     b_rows = cursor.fetchall()
     texts = read_review(b_rows)
-    for text in texts:
-        sentence = text
-        sentence = re.sub(r'《.+?》', '',sentence)#ルビを削除
-        sentence = re.sub(r'【.+?】', '',sentence)#入力注を削除
-        sentence = re.sub(r'・', '',sentence)
-        tokens = tokenizer.tokenize(sentence)
-        element = CorpusElement(text, tokens)
-        b_corpus.append(element)
-
+    b_corpus = text_read(texts)
     b_point = calc_review_point(b_corpus)
     
     if b_point < -1:
