@@ -38,6 +38,13 @@ def read_review(rows):
         texts.remove('') 
     return texts
 
+def score(point):
+    if point > 5:
+      point = 5.00
+    if point < 0:
+      point < 0.00
+    return point
+
 texts = read_review(rows)
 bf = BayesianFilter()
 #テキストを学習
@@ -70,23 +77,11 @@ d_score = 3 + (d_scorelist[0][1] - d_scorelist[1][1])
 c_score = 3 + (c_scorelist[0][1] - c_scorelist[1][1])
 f_score = 3 + (f_scorelist[0][1] - f_scorelist[1][1])
 
-if p_score > 5:
-    p_score = 5.00
-if d_score > 5:
-    d_score = 5.00
-if c_score > 5:
-    c_score = 5.00
-if f_score > 5:
-    f_score = 5.00
+p_score = score(p_score)
+d_score = score(d_score)
+c_score = score(c_score)
+f_score = score(f_score)
 
-if p_score < 0:
-    p_score = 0.00
-if d_score < 0:
-    d_score = 0.00
-if c_score < 0:
-    c_score = 0.00
-if f_score < 0:
-    f_score = 0.00 
 #rails側に値を渡す。
 print(round(p_score,2))
 print(round(d_score,2))
