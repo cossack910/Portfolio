@@ -21,7 +21,7 @@ class OtherAddController < ApplicationController
         Gadget.find(params[:id]).update(gadget_update_params)
         redirect_to '/other_add' 
     end
-
+    #デモンストレーション用のコード
     def test
         @review_del = Review.maximum(:id)
         Review.find(@review_del).destroy

@@ -57,8 +57,15 @@ try:
             corpus.append(element)
         return corpus
 
+    g_texts = []
     texts = read_review(g_rows)
-    g_corpus = text_read(texts)   
+    for text in texts:
+        sentence = text
+        sentence = re.sub(r'軽い', '使える',sentence)
+        sentence = re.sub(r'安い', '良い',sentence)
+        g_texts.append(sentence)
+    #print(g_texts) デバック用
+    g_corpus = text_read(g_texts)   
 
     def load_pn_dict():
         dic = {}
@@ -100,8 +107,15 @@ try:
     cursor.execute("SELECT bad_review FROM reviews WHERE id = (select max(id) from reviews)")
     # fetchall()で全件取り出し
     b_rows = cursor.fetchall()
+
+    b_texts = []
     texts = read_review(b_rows)
-    b_corpus = text_read(texts)
+    for text in texts:
+        sentence = text
+        sentence = re.sub(r'高い', '',sentence)
+        b_texts.append(sentence)
+    b_corpus = text_read(b_texts)
+    #print(b_texts) デバック用
     b_point = calc_review_point(b_corpus)
     
     if b_point < -1:
